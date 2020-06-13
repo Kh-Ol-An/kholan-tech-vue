@@ -1,6 +1,6 @@
 <template>
   <header class="main">
-    <router-link to="/" title="logo" class="logo">logo</router-link>
+    <router-link class="logo" v-for="l in content" :key="l.logo" to="/" title="logo">{{ l.logo }}</router-link>
 
     <Languages />
 
@@ -13,13 +13,13 @@
       </div>
       <ul class="nav">
         <li class="nav__item">
-          <router-link to="/" class="link">Main</router-link>
+          <router-link class="link" to="/">Main</router-link>
         </li>
         <li class="nav__item">
-          <router-link to="/cv" class="link">CV</router-link>
+          <router-link class="link" to="/cv">CV</router-link>
         </li>
         <li class="nav__item">
-          <router-link to="/contacts" class="link">Contacts</router-link>
+          <router-link class="link" to="/contacts">Contacts</router-link>
         </li>
       </ul>
     </label>
@@ -28,14 +28,14 @@
 
 <script>
 import Languages from "@/components/Languages";
-// import content from "@/content/content.json";
+import content from "@/content/content.json";
 
 export default {
   name: "Header",
-  components: { Languages }
-  // data() {
-  //   return { content };
-  // }
+  components: { Languages },
+  data() {
+    return { content };
+  }
 };
 </script>
 
