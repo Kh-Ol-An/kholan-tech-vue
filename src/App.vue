@@ -21,4 +21,9 @@ export default {
 @import "~@/styles/reset.scss";
 @import "~@/styles/base.scss";
 @import "~@/styles/fonts.scss";
+
+
+.lang-wrap:hover ~ a {
+    padding-bottom: 1.6em;
+}
 </style>

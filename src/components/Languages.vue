@@ -1,20 +1,27 @@
 <template>
     <div class="lang-wrap">
         <label
+            v-for="data in content"
+            :key="data.language"
             class="label"
-            :class="disable"
+            :class="{ enable: localLang === data.lang, disable: localLang !== data.lang }"
             title="language"
-            v-for="lang in langs"
-            :key="lang.language"
         >
-            <input class="input" type="radio" v-model.lazy="localLang" />
-            <span class="span">{{ lang.language }}</span>
-            <span class="flag" />
+            <input
+                class="input"
+                type="radio"
+                :value="data.lang"
+                v-model="localLang"
+                @change="handleChange"
+            />
+            <span class="span">{{ data.language }}</span>
+            <span class="flag" :class="data.lang" />
         </label>
     </div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
 import content from "@/content/content.json";
 
 export default {
@@ -23,19 +30,23 @@ export default {
         return {
             content,
             localLang: localStorage.getItem("lang"),
-            langs: "",
-            disable: {
-                disable1: true,
-                disable2: false
-            }
+            enable: false,
+            disable: false
         };
     },
     mounted() {
-        if (this.localLang) {
+        if (!this.localLang) {
             localStorage.setItem("lang", "en");
             this.localLang = "en";
         }
-        this.langs = this.content;
+        this.setContentLang(this.localLang);
+    },
+    methods: {
+        ...mapActions(["setContentLang"]),
+        handleChange() {
+            this.setContentLang(this.localLang);
+            localStorage.setItem("lang", this.localLang);
+        }
     }
 };
 </script>
@@ -45,7 +56,7 @@ export default {
 
 .lang-wrap {
     position: fixed;
-    top: 1.4em;
+    top: 1.2em;
     right: 1.6em;
     z-index: 2;
 
@@ -74,6 +85,58 @@ export default {
             background-position: right;
             background-repeat: no-repeat;
         }
+
+        .en {
+            background-image: url("~@/assets/images/flag/uk.png");
+        }
+
+        .ua {
+            background-image: url("~@/assets/images/flag/ua.png");
+        }
+
+        .ru {
+            background-image: url("~@/assets/images/flag/ru.png");
+        }
+    }
+
+    .enable {
+        z-index: 1;
+    }
+
+    .disable {
+        opacity: 0;
+        transition: all 300ms ease-in;
+    }
+
+    .disable {
+        top: 1.5625em;
+        transform: translateY(-1.5625em);
+    }
+
+    .disable ~ .disable {
+        top: 3.125em;
+        transform: translateY(-3.125em);
     }
 }
+
+.lang-wrap:hover .disable {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.lang-wrap:hover .en {
+    background-image: url("~@/assets/images/flag/uk.gif");
+}
+
+.lang-wrap:hover .ua {
+    background-image: url("~@/assets/images/flag/ua.gif");
+}
+
+.lang-wrap:hover .ru {
+    background-image: url("~@/assets/images/flag/ru.gif");
+}
+
+// .enable:hover {
+//   color: red;
+// }
 </style>
