@@ -2,7 +2,7 @@
     <header class="main">
         <Languages />
 
-        <router-link class="logo" to="/" title="logo">{{ getContentLang['nav'] }}</router-link>
+        <router-link class="logo" to="/" title="logo">{{ getContentLang.logo }}</router-link>
 
         <label class="nav-container">
             <input type="checkbox" />
@@ -13,13 +13,13 @@
             </div>
             <ul class="nav">
                 <li class="nav__item">
-                    <router-link class="link" to="/">main</router-link>
+                    <router-link class="link" to="/">{{ (getContentLang && getContentLang.nav) ? getContentLang.nav.main : '' }}</router-link>
                 </li>
                 <li class="nav__item">
-                    <router-link class="link" to="/cv">cv</router-link>
+                    <router-link class="link" to="/cv">{{ (getContentLang && getContentLang.nav) ? getContentLang.nav.cv : '' }}</router-link>
                 </li>
                 <li class="nav__item">
-                    <router-link class="link" to="/contacts">contacts</router-link>
+                    <router-link class="link" to="/contacts">{{ (getContentLang && getContentLang.nav) ? getContentLang.nav.contacts : '' }}</router-link>
                 </li>
             </ul>
         </label>
@@ -33,7 +33,9 @@ import { mapGetters } from "vuex";
 export default {
     name: "Header",
     components: { Languages },
-    computed: mapGetters(["getContentLang"])
+    computed: {
+        ...mapGetters(["getContentLang"])
+    }
 };
 </script>
 

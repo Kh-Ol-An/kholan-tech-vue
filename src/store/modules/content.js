@@ -3,10 +3,9 @@ import content from "@/content/content.json";
 export default {
     actions: {
         setContentLang({ commit }, lang) {
-          // console.log('content.nav :>> ', content[0].nav);
             return commit(
                 "updateContentLang",
-                content.find((el) => lang === el.lang)
+                content.find((el) => el.lang === lang)
             );
         },
     },
@@ -16,7 +15,7 @@ export default {
         },
     },
     state: {
-        contentLang: [],
+        contentLang: {},
     },
     getters: {
         getContentLang({ contentLang }) {
