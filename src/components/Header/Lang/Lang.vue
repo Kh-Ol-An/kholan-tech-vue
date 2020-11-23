@@ -2,7 +2,7 @@
     <div class="lang-wrap">
         <label
             v-for="data in content"
-            :key="data.language"
+            :key="data.lang"
             class="label"
             :class="{ enable: localLang === data.lang, disable: localLang !== data.lang }"
             title="language"
@@ -15,21 +15,21 @@
                 @change="handleChange"
             />
             <span class="span">{{ data.language }}</span>
-            <span class="flag" :class="data.lang" />
+            <span class="flag" :class="data.lang"/>
         </label>
     </div>
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import {mapActions} from "vuex";
 import content from "@/content/content.json";
 
 export default {
-    name: "Languages",
+    name: "Lang",
     data() {
         return {
             content,
-            localLang: localStorage.getItem("lang"),
+            localLang: "",
             enable: false,
             disable: false
         };
@@ -39,12 +39,12 @@ export default {
             localStorage.setItem("lang", "en");
             this.localLang = "en";
         }
-        this.setContentLang(this.localLang);
+        this.updateContentLang(this.localLang);
     },
     methods: {
-        ...mapActions(["setContentLang"]),
+        ...mapActions(["updateContentLang"]),
         handleChange() {
-            this.setContentLang(this.localLang);
+            this.updateContentLang(this.localLang);
             localStorage.setItem("lang", this.localLang);
         }
     }

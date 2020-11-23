@@ -1,25 +1,24 @@
 import content from "@/content/content.json";
 
 export default {
-    actions: {
-        setContentLang({ commit }, lang) {
-            return commit(
-                "updateContentLang",
-                content.find((el) => el.lang === lang)
-            );
-        },
-    },
-    mutations: {
-        updateContentLang(state, content) {
-            state.contentLang = content;
-        },
-    },
     state: {
         contentLang: {},
     },
+
     getters: {
-        getContentLang({ contentLang }) {
-            return contentLang;
+        getContentLang: state => state.contentLang
+    },
+
+    mutations: {
+        setContentLang(state, payload) {
+            state.contentLang = payload;
+        },
+    },
+
+    actions: {
+        updateContentLang({ commit }, lang) {
+            const completeContent = content.find((el) => el.lang === lang)
+            return commit("setContentLang", completeContent);
         },
     },
 };

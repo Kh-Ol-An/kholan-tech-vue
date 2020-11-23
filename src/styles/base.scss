@@ -3,7 +3,7 @@ html {
   box-sizing: border-box;
 }
 
-​*,
+*,
 *::before,
 *::after {
   font-size: inherit;
@@ -46,7 +46,10 @@ button {
     cursor: pointer;
 }
 
+*:active,
 *:focus,
+a:active,
+a:focus,
 input {
     outline: none;
 }

@@ -1,6 +1,6 @@
 <template>
     <header class="main">
-        <Languages />
+        <Lang />
 
         <router-link class="logo" to="/" title="logo">{{ getContentLang.logo }}</router-link>
 
@@ -27,12 +27,12 @@
 </template>
 
 <script>
-import Languages from "@/components/Languages";
+import Lang from "@/components/Header/Lang/Lang";
 import { mapGetters } from "vuex";
 
 export default {
     name: "Header",
-    components: { Languages },
+    components: { Lang },
     computed: {
         ...mapGetters(["getContentLang"])
     }
