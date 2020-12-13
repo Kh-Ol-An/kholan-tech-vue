@@ -1,5 +1,5 @@
 <template>
-    <div class="main" @click="handleDisactive" @keydown.esc="inactive">
+    <div class="main" tabindex="0" @click="handleInActive" @keydown.esc="inActive">
         <div class="main__download">
             <span class="main__download-text">{{ getContentLang.download_cv }}</span>
             <a class="main__download-link" :title="getContentLang.title.download" :href="link">
@@ -7,12 +7,14 @@
             </a>
         </div>
 
-        <div class="main__tablet" :class="{overflow: isOverflow}">
-            <img class="main__tablet-img" :class="{IMG: isIMG}" src="@/assets/images/bg/cv-bg-img.png" alt="tablet" width="1920"/>
-            <button class="main__tablet-btn" :title="getContentLang.title.click" type="button"
+        <div class="main__tablet">
+            <img class="main__tablet-img" :class="{absolute: isAbsolute, index: isIndex}" src="@/assets/images/bg/cv-bg-img.png"
+                 alt="tablet"
+                 width="1920"/>
+            <button class="main__tablet-btn" :class="{none: isNone}" :title="getContentLang.title.click" type="button"
                     @click="handleActive"></button>
-            <div class="main__tablet-cv" :class="{index: isIndex, active: isActive, static: isStatic}">
-                <a class="main__tablet-cv-link" :class="{pointer: isPointer}" :title="getContentLang.title.download"
+            <div class="main__tablet-cv" :class="{active: isActive, static: isStatic}">
+                <a class="main__tablet-cv-link" :title="getContentLang.title.download"
                    :href="link">
                     <img class="main__tablet-cv-img" :src="cvImg" alt="resume" width="1414"/>
                 </a>
@@ -28,14 +30,11 @@ export default {
     name: "CV",
     data() {
         return {
-            isOverflow: false,
-            isPointer: false,
+            isAbsolute: false,
             isIndex: false,
+            isNone: false,
             isActive: false,
-            isIMG: false,
             isStatic: false,
-            // isIndex: true,
-            // isActive: true,
         }
     },
     computed: {
@@ -57,29 +56,29 @@ export default {
     },
     methods: {
         active() {
-            this.isIndex = true
+            this.isNone = true
             this.isActive = true
-            this.isOverflow = true
             setTimeout(() => {
-                this.isIMG = true
+                this.isAbsolute = true
+                this.isIndex = true
                 this.isStatic = true
             }, 700)
         },
-        inactive() {
-            this.isIndex = false
+        inActive() {
+            this.isAbsolute = false
             this.isActive = false
-            this.isOverflow = false
+            this.isStatic = false
             setTimeout(() => {
-                this.isIMG = false
-                this.isStatic = false
+                this.isIndex = false
+                this.isNone = false
             }, 700)
         },
         handleActive() {
             this.active()
         },
-        handleDisactive(e) {
+        handleInActive(e) {
             if (e.target !== e.currentTarget) return
-            this.inactive()
+            this.inActive()
         },
     },
 }
@@ -89,28 +88,18 @@ export default {
 @import "~@/styles/variables.scss";
 
 .main {
-    //height: 100vh;
     overflow-x: hidden;
     overflow-y: auto;
-    //position: absolute;
-    //top: 0;
-    //right: 0;
-    //bottom: 0;
-    //left: 0;
-    background-image: url('~@/assets/images/bg/cv-bg-img.jpg');
     background-attachment: fixed;
-    //background-attachment: scroll;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    background-color: #DCDBE0;
     display: flex;
     flex-flow: column;
 
     &__download {
-        //width: fit-content;
         height: 5em;
-        //position: relative;
-        //top: 8em;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -182,30 +171,28 @@ export default {
     &__tablet {
         width: 90%;
         position: relative;
-        //top: 9.6em;
-        //margin: 0 auto 6.4em;
         margin: 1.6em auto 6.4em;
         border-radius: 2em;
         overflow: hidden;
         transition: transform 700ms ease-in;
-
-        &.overflow {
-            //overflow: unset;
-            //overflow-x: hidden;
-            //overflow-y: auto;
-        }
+        box-shadow: 0 1px 4px rgba(0, 0, 0, .3),
+        -23px 0 20px -23px rgba(0, 0, 0, .6),
+        23px 0 20px -23px rgba(0, 0, 0, .6),
+        inset 0 0 40px rgba(0, 0, 0, .1);
 
         &-img {
             position: relative;
             width: 100%;
             height: 100%;
-            //object-fit: contain;
             border-radius: 2em;
             z-index: 1;
 
-            &.IMG {
+            &.absolute {
                 position: absolute;
-                z-index: -1;
+            }
+
+            &.index {
+                z-index: 0;
             }
         }
 
@@ -215,7 +202,6 @@ export default {
             position: absolute;
             top: 21%;
             left: 5%;
-            //transform: rotate3D(44, -41, 52, 66deg);
             transform: rotate3D(44, -41, 52, 66deg);
             border: none;
             padding: 0;
@@ -223,6 +209,10 @@ export default {
             background: transparent;
             cursor: pointer;
             z-index: 2;
+
+            &.none {
+                display: none;
+            }
         }
 
         &-cv {
@@ -230,20 +220,17 @@ export default {
             position: absolute;
             top: 4%;
             left: -15%;
-            //transform: rotate3D(44, -41, 52, 66deg);
             transform: rotate3D(44, -41, 52, 66deg);
-            transition: transform 700ms ease-in;
-
-            &.index {
-                cursor: pointer;
-                z-index: 3;
-            }
+            transition: transform 700ms ease-in,
+            top 700ms ease-in,
+            left 700ms ease-in;
 
             &.active {
-                //top: 0%;
-                //left: 0%;
+                top: 0;
+                left: 0;
                 transform: rotate3D(0, 0, 0, 0deg);
-                //margin-bottom: 3.2em;
+                cursor: pointer;
+                z-index: 3;
             }
 
             &.static {
@@ -254,16 +241,11 @@ export default {
                 width: 100%;
                 height: 100%;
                 pointer-events: none;
-
-                &.pointer {
-                    pointerEvents: 'auto'
-                }
             }
 
             &-img {
                 width: 100%;
                 height: 100%;
-                //margin-bottom: 8em;
             }
         }
 
