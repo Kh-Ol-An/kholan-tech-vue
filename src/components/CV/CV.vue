@@ -1,5 +1,5 @@
 <template>
-    <div class="main" tabindex="0" @click="handleInActive" @keydown.esc="inActive">
+    <div class="main" @click="handleInActive">
         <div class="main__download">
             <span class="main__download-text">{{ getContentLang.download_cv }}</span>
             <a class="main__download-link" :title="getContentLang.title.download" :href="link">
@@ -8,7 +8,8 @@
         </div>
 
         <div class="main__tablet">
-            <img class="main__tablet-img" :class="{absolute: isAbsolute, index: isIndex}" src="@/assets/images/bg/cv-bg-img.png"
+            <img class="main__tablet-img" :class="{absolute: isAbsolute, index: isIndex}"
+                 src="@/assets/images/bg/cv-bg-img.png"
                  alt="tablet"
                  width="1920"/>
             <button class="main__tablet-btn" :class="{none: isNone}" :title="getContentLang.title.click" type="button"
@@ -62,6 +63,7 @@ export default {
                 this.isAbsolute = true
                 this.isIndex = true
                 this.isStatic = true
+                document.addEventListener("keydown", this.handleEsc)
             }, 700)
         },
         inActive() {
@@ -71,6 +73,7 @@ export default {
             setTimeout(() => {
                 this.isIndex = false
                 this.isNone = false
+                document.removeEventListener("keydown", this.handleEsc)
             }, 700)
         },
         handleActive() {
@@ -80,7 +83,18 @@ export default {
             if (e.target !== e.currentTarget) return
             this.inActive()
         },
+        handleEsc(e) {
+            // console.log(e)
+            if (e.key !== "Escape") return
+            this.inActive()
+        },
     },
+    mounted() {
+        console.log("mounted")
+    },
+    beforeDestroy() {
+        console.log("beforeDestroy")
+    }
 }
 </script>
 

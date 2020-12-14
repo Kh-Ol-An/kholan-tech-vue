@@ -55,7 +55,6 @@ export default {
     computed: {
         ...mapGetters(["getContentLang"]),
         titlePhone() {
-            console.log("object >>", this.contentLang)
             return this.getContentLang.lang === "en" ? "Phone" : "Телефон"
         },
         isMobile() {
