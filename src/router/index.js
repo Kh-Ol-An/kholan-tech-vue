@@ -10,6 +10,11 @@ const routes = [
     component: () => import("@/views/MainPage.vue")
   },
   {
+    path: "/games",
+    name: "GamesPage",
+    component: () => import("@/views/GamesPage.vue")
+  },
+  {
     path: "/cv",
     name: "CVPage",
     component: () => import("@/views/CVPage.vue")
@@ -18,7 +23,7 @@ const routes = [
     path: "/contacts",
     name: "ContactsPage",
     component: () => import("@/views/ContactsPage.vue")
-  }
+  },
 ];
 
 const router = new VueRouter({

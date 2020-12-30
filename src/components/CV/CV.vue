@@ -1,23 +1,23 @@
 <template>
-    <div class="main" @click="handleInActive">
-        <div class="main__download">
-            <span class="main__download-text">{{ getContentLang.download_cv }}</span>
-            <a class="main__download-link" :title="getContentLang.title.download" :href="link">
+    <div class="CV" @click="handleInActive">
+        <div class="CV__download">
+            <span class="CV__download-text">{{ getContentLang.download_cv }}</span>
+            <a class="CV__download-link" :title="getContentLang.title.download" :href="link">
                 {{ getContentLang.download_cv }}
             </a>
         </div>
 
-        <div class="main__tablet">
-            <img class="main__tablet-img" :class="{absolute: isAbsolute, index: isIndex}"
+        <div class="CV__tablet">
+            <img class="CV__tablet-img" :class="{absolute: isAbsolute, index: isIndex}"
                  src="@/assets/images/bg/cv-bg-img.png"
                  alt="tablet"
                  width="1920"/>
-            <button class="main__tablet-btn" :class="{none: isNone}" :title="getContentLang.title.click" type="button"
+            <button class="CV__tablet-btn" :class="{none: isNone}" :title="getContentLang.title.click" type="button"
                     @click="handleActive"></button>
-            <div class="main__tablet-cv" :class="{active: isActive, static: isStatic}">
-                <a class="main__tablet-cv-link" :title="getContentLang.title.download"
+            <div class="CV__tablet-cv" :class="{active: isActive, static: isStatic}">
+                <a class="CV__tablet-cv-link" :title="getContentLang.title.download"
                    :href="link">
-                    <img class="main__tablet-cv-img" :src="cvImg" alt="resume" width="1414"/>
+                    <img class="CV__tablet-cv-img" :src="cvImg" alt="resume" width="1414"/>
                 </a>
             </div>
         </div>
@@ -89,19 +89,19 @@ export default {
             this.inActive()
         },
     },
-    mounted() {
-        console.log("mounted")
-    },
-    beforeDestroy() {
-        console.log("beforeDestroy")
-    }
+    // mounted() {
+    //     console.log("mounted")
+    // },
+    // beforeDestroy() {
+    //     console.log("beforeDestroy")
+    // }
 }
 </script>
 
 <style scoped lang="scss">
 @import "~@/styles/variables.scss";
 
-.main {
+.CV {
     overflow-x: hidden;
     overflow-y: auto;
     background-attachment: fixed;

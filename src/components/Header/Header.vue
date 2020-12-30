@@ -16,6 +16,9 @@
                     <router-link class="link" to="/">{{ (getContentLang && getContentLang.nav) ? getContentLang.nav.main : '' }}</router-link>
                 </li>
                 <li class="nav__item">
+                    <router-link class="link" to="/games">{{ (getContentLang && getContentLang.nav) ? getContentLang.nav.games : '' }}</router-link>
+                </li>
+                <li class="nav__item">
                     <router-link class="link" to="/cv">{{ (getContentLang && getContentLang.nav) ? getContentLang.nav.cv : '' }}</router-link>
                 </li>
                 <li class="nav__item">
