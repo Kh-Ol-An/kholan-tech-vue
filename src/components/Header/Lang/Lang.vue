@@ -22,7 +22,7 @@
 
 <script>
 import {mapActions} from "vuex";
-import content from "@/content/content.json";
+import content from "@/content/lang.json";
 
 export default {
     name: "Lang",
