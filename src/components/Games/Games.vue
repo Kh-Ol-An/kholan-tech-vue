@@ -10,6 +10,7 @@
                 {{ count }}
             </li>
 
+            <!-- старт/дом и финиш каждого игрока -->
             <li class="WENS__field-cell west-start-1">ws1</li>
             <li class="WENS__field-cell west-start-2">ws2</li>
             <li class="WENS__field-cell west-start-3">ws3</li>
@@ -46,21 +47,7 @@
             <li class="WENS__field-cell south-finish-3">sf3</li>
             <li class="WENS__field-cell south-finish-4">sf4</li>
 
-            <li class="WENS__field-cell player-west west-1"></li>
-            <li class="WENS__field-cell player-west west-2"></li>
-            <li class="WENS__field-cell player-west west-3"></li>
-            <li class="WENS__field-cell player-west west-4"></li>
-
-            <li class="WENS__field-cell player-east east-1"></li>
-            <li class="WENS__field-cell player-east east-2"></li>
-            <li class="WENS__field-cell player-east east-3"></li>
-            <li class="WENS__field-cell player-east east-4"></li>
-
-            <li class="WENS__field-cell player-north north-1"></li>
-            <li class="WENS__field-cell player-north north-2"></li>
-            <li class="WENS__field-cell player-north north-3"></li>
-            <li class="WENS__field-cell player-north north-4"></li>
-
+            <!-- фишки игрока -->
             <li class="WENS__field-cell" :class="'pos-' + posWest1" @click="handlePlayerWest1">
                 <span class="player-west">w1</span>
             </li>
@@ -113,11 +100,14 @@
                 <span class="player-south">s4</span>
             </li>
 
+            <!-- кнопка бросить кубик -->
             <li class="WENS__field-roll-dice"
                 :class="{'west': isWestDice, 'east': isEastDice, 'north': isNorthDice, 'south': isSouthDice}">
-                <button type="button" @click="handleRollDice">roll dice</button>
+                <button type="button" @click="handleRollDice">{{ diceInscription }}</button>
             </li>
         </ul>
+
+        <!-- кубики -->
         <p class="WENS__dice dice-1">{{ dice1 }}</p>
         <p class="WENS__dice dice-2">{{ dice2 }}</p>
     </div>
@@ -133,11 +123,14 @@ export default {
             content,
             dice1: 6,
             dice2: 6,
+            diceInscription: "roll dice",
             turn: 1,
+            // расположение кнопки кубика
             isWestDice: false,
             isEastDice: false,
             isNorthDice: false,
             isSouthDice: true,
+            // позиция фишек у каждого игрока
             posWest1: 'west-1',
             posWest2: 'west-2',
             posWest3: 'west-3',
@@ -154,6 +147,7 @@ export default {
             posSouth2: 'south-2',
             posSouth3: 'south-3',
             posSouth4: 'south-4',
+            // флаг движения фишек у каждого игрока
             isMoveWest1: false,
             isMoveWest2: false,
             isMoveWest3: false,
@@ -173,49 +167,70 @@ export default {
         }
     },
     methods: {
-        handleRollDice() {
+        handleRollDice() { // бросок кубика
             console.log("handleRollDice", this.isWestDice)
+            // рандомное значение кубиков
             this.dice1 = Math.floor(1 + Math.random() * 6)
             this.dice2 = Math.floor(1 + Math.random() * 6)
-            if (this.dice1 !== 6 || this.dice2 !== 6) {
-                this.turn++
+            // условие перехода хода
+            if (this.dice1 !== this.dice2) { // если кубики не равны
+                if (this.isWestDice && !this.isMoveWest1 && !this.isMoveWest2 && !this.isMoveWest3 && !this.isMoveWest4) { // если кубики бросает соответствующий игрок и все фишки игрока дома
+                    this.turn++
+                    this.diceInscription = "roll dice"
+                }
+                if (this.isEastDice && !this.isMoveEast1 && !this.isMoveEast2 && !this.isMoveEast3 && !this.isMoveEast4) {
+                    this.turn = 1
+                    this.diceInscription = "roll dice"
+                }
+                if (this.isNorthDice && !this.isMoveNorth1 && !this.isMoveNorth2 && !this.isMoveNorth3 && !this.isMoveNorth4) {
+                    this.turn++
+                    this.diceInscription = "roll dice"
+                }
+                if (this.isSouthDice && !this.isMoveSouth1 && !this.isMoveSouth2 && !this.isMoveSouth3 && !this.isMoveSouth4) {
+                    this.turn++
+                    this.diceInscription = "roll dice"
+                }
+            } else {
+                this.diceInscription = "go"
             }
-            if (this.turn === 1 || this.turn === 5) {
-                this.turn = 1;
+            // if (this.turn === 1 || this.turn === 5) { // ходит юг
+            //     this.turn = 1;
+            if (this.turn === 1) { // ходит юг
                 this.isWestDice = false;
                 this.isEastDice = false;
                 this.isNorthDice = false;
                 this.isSouthDice = true;
-            } else if (this.turn === 2) {
+            } else if (this.turn === 2) { // ходит запад
                 this.isWestDice = true;
                 this.isEastDice = false;
                 this.isNorthDice = false;
                 this.isSouthDice = false;
-            } else if (this.turn === 3) {
+            } else if (this.turn === 3) { // ходит север
                 this.isWestDice = false;
                 this.isEastDice = false;
                 this.isNorthDice = true;
                 this.isSouthDice = false;
-            } else {
+            } else { // ходит восток
                 this.isWestDice = false;
                 this.isEastDice = true;
                 this.isNorthDice = false;
                 this.isSouthDice = false;
             }
         },
-        handleFieldClick(e) {
+        handleFieldClick(e) { // клик по полю
             console.log("handleFieldClick", e)
-            e.path.map(el => {
-                if (el.className) {
-                    if (el.className.includes("player")) return
-                }
-            })
-
-            if (this.isMoveWest1) {
-                if (this.isMoveWest1 === "home") {
-                    if (e.target.classList[1].split("-")[1] !== "14") return
-                    this.posWest1 = e.target.classList[1].split("-")[1]
-                    this.isMoveWest1 = false
+            if (this.isMoveWest1) { // если движение игроку разрешено
+                if (this.isMoveWest1 === "home") { // если игрок находится дома
+                    if (e.target.classList[1].split("-")[1] !== "14") return // после взятия фишки разрешаю становиться только в начало
+                    this.posWest1 = e.target.classList[1].split("-")[1] // меняю позицию игрока
+                    this.isMoveWest1 = false // запрещаю дальнейший ход игрока
+                    // передаю ход дальше
+                    this.turn++
+                    this.diceInscription = "roll dice"
+                    this.isWestDice = false;
+                    this.isEastDice = false;
+                    this.isNorthDice = true;
+                    this.isSouthDice = false;
                 }
             }
             if (this.isMoveWest2) {
@@ -223,6 +238,12 @@ export default {
                     if (e.target.classList[1].split("-")[1] !== "14") return
                     this.posWest2 = e.target.classList[1].split("-")[1]
                     this.isMoveWest2 = false
+                    this.turn++
+                    this.diceInscription = "roll dice"
+                    this.isWestDice = false;
+                    this.isEastDice = false;
+                    this.isNorthDice = true;
+                    this.isSouthDice = false;
                 }
             }
             if (this.isMoveWest3) {
@@ -230,6 +251,12 @@ export default {
                     if (e.target.classList[1].split("-")[1] !== "14") return
                     this.posWest3 = e.target.classList[1].split("-")[1]
                     this.isMoveWest3 = false
+                    this.turn++
+                    this.diceInscription = "roll dice"
+                    this.isWestDice = false;
+                    this.isEastDice = false;
+                    this.isNorthDice = true;
+                    this.isSouthDice = false;
                 }
             }
             if (this.isMoveWest4) {
@@ -237,6 +264,12 @@ export default {
                     if (e.target.classList[1].split("-")[1] !== "14") return
                     this.posWest4 = e.target.classList[1].split("-")[1]
                     this.isMoveWest4 = false
+                    this.turn++
+                    this.diceInscription = "roll dice"
+                    this.isWestDice = false;
+                    this.isEastDice = false;
+                    this.isNorthDice = true;
+                    this.isSouthDice = false;
                 }
             }
 
@@ -245,6 +278,12 @@ export default {
                     if (e.target.classList[1].split("-")[1] !== "42") return
                     this.posEast1 = e.target.classList[1].split("-")[1]
                     this.isMoveEast1 = false
+                    this.turn = 1
+                    this.diceInscription = "roll dice"
+                    this.isWestDice = false;
+                    this.isEastDice = false;
+                    this.isNorthDice = false;
+                    this.isSouthDice = true;
                 }
             }
             if (this.isMoveEast2) {
@@ -252,6 +291,12 @@ export default {
                     if (e.target.classList[1].split("-")[1] !== "42") return
                     this.posEast2 = e.target.classList[1].split("-")[1]
                     this.isMoveEast2 = false
+                    this.turn = 1
+                    this.diceInscription = "roll dice"
+                    this.isWestDice = false;
+                    this.isEastDice = false;
+                    this.isNorthDice = false;
+                    this.isSouthDice = true;
                 }
             }
             if (this.isMoveEast3) {
@@ -259,6 +304,12 @@ export default {
                     if (e.target.classList[1].split("-")[1] !== "42") return
                     this.posEast3 = e.target.classList[1].split("-")[1]
                     this.isMoveEast3 = false
+                    this.turn = 1
+                    this.diceInscription = "roll dice"
+                    this.isWestDice = false;
+                    this.isEastDice = false;
+                    this.isNorthDice = false;
+                    this.isSouthDice = true;
                 }
             }
             if (this.isMoveEast4) {
@@ -266,6 +317,12 @@ export default {
                     if (e.target.classList[1].split("-")[1] !== "42") return
                     this.posEast4 = e.target.classList[1].split("-")[1]
                     this.isMoveEast4 = false
+                    this.turn = 1
+                    this.diceInscription = "roll dice"
+                    this.isWestDice = false;
+                    this.isEastDice = false;
+                    this.isNorthDice = false;
+                    this.isSouthDice = true;
                 }
             }
 
@@ -274,6 +331,12 @@ export default {
                     if (e.target.classList[1].split("-")[1] !== "28") return
                     this.posNorth1 = e.target.classList[1].split("-")[1]
                     this.isMoveNorth1 = false
+                    this.turn++
+                    this.diceInscription = "roll dice"
+                    this.isWestDice = false;
+                    this.isEastDice = true;
+                    this.isNorthDice = false;
+                    this.isSouthDice = false;
                 }
             }
             if (this.isMoveNorth2) {
@@ -281,6 +344,12 @@ export default {
                     if (e.target.classList[1].split("-")[1] !== "28") return
                     this.posNorth2 = e.target.classList[1].split("-")[1]
                     this.isMoveNorth2 = false
+                    this.turn++
+                    this.diceInscription = "roll dice"
+                    this.isWestDice = false;
+                    this.isEastDice = true;
+                    this.isNorthDice = false;
+                    this.isSouthDice = false;
                 }
             }
             if (this.isMoveNorth3) {
@@ -288,6 +357,12 @@ export default {
                     if (e.target.classList[1].split("-")[1] !== "28") return
                     this.posNorth3 = e.target.classList[1].split("-")[1]
                     this.isMoveNorth3 = false
+                    this.turn++
+                    this.diceInscription = "roll dice"
+                    this.isWestDice = false;
+                    this.isEastDice = true;
+                    this.isNorthDice = false;
+                    this.isSouthDice = false;
                 }
             }
             if (this.isMoveNorth4) {
@@ -295,15 +370,26 @@ export default {
                     if (e.target.classList[1].split("-")[1] !== "28") return
                     this.posNorth4 = e.target.classList[1].split("-")[1]
                     this.isMoveNorth4 = false
+                    this.turn++
+                    this.diceInscription = "roll dice"
+                    this.isWestDice = false;
+                    this.isEastDice = true;
+                    this.isNorthDice = false;
+                    this.isSouthDice = false;
                 }
             }
 
             if (this.isMoveSouth1) {
                 if (this.isMoveSouth1 === "home") {
                     if (e.target.classList[1].split("-")[1] !== "0") return
-                    console.log("handleFieldClick", e.target.classList[1].split("-")[1])
                     this.posSouth1 = e.target.classList[1].split("-")[1]
                     this.isMoveSouth1 = false
+                    this.turn++
+                    this.diceInscription = "roll dice"
+                    this.isWestDice = true;
+                    this.isEastDice = false;
+                    this.isNorthDice = false;
+                    this.isSouthDice = false;
                 }
             }
             if (this.isMoveSouth2) {
@@ -311,6 +397,12 @@ export default {
                     if (e.target.classList[1].split("-")[1] !== "0") return
                     this.posSouth2 = e.target.classList[1].split("-")[1]
                     this.isMoveSouth2 = false
+                    this.turn++
+                    this.diceInscription = "roll dice"
+                    this.isWestDice = true;
+                    this.isEastDice = false;
+                    this.isNorthDice = false;
+                    this.isSouthDice = false;
                 }
             }
             if (this.isMoveSouth3) {
@@ -318,6 +410,12 @@ export default {
                     if (e.target.classList[1].split("-")[1] !== "0") return
                     this.posSouth3 = e.target.classList[1].split("-")[1]
                     this.isMoveSouth3 = false
+                    this.turn++
+                    this.diceInscription = "roll dice"
+                    this.isWestDice = true;
+                    this.isEastDice = false;
+                    this.isNorthDice = false;
+                    this.isSouthDice = false;
                 }
             }
             if (this.isMoveSouth4) {
@@ -325,267 +423,242 @@ export default {
                     if (e.target.classList[1].split("-")[1] !== "0") return
                     this.posSouth4 = e.target.classList[1].split("-")[1]
                     this.isMoveSouth4 = false
+                    this.turn++
+                    this.diceInscription = "roll dice"
+                    this.isWestDice = true;
+                    this.isEastDice = false;
+                    this.isNorthDice = false;
+                    this.isSouthDice = false;
                 }
             }
         },
-        handlePlayerWest1(e) {
-            if (!this.isWestDice) return
+        handlePlayerWest1(e) { // клик по игроку
+            if (!this.isWestDice) return // если не твой ход, выйди
             console.log("handlePlayerWest1")
-            e.path.map(el => {
-                if (el.nodeName === "LI" && el.className.includes("west-")) {
-                    this.isMoveWest1 = "home"
-                    this.isMoveWest2 = false
-                    this.isMoveWest3 = false
-                    this.isMoveWest4 = false
-                }
-            })
-            // this.isMoveWest1 = true
-            // this.isMoveWest2 = false
-            // this.isMoveWest3 = false
-            // this.isMoveWest4 = false
+            if (!this.isMoveWest1 && this.dice1 === this.dice2) { // если фишка дома и на кубиках дубль
+                e.path.map(el => {
+                    if (el.nodeName === "LI" && el.className.includes("west-")) { // если это тег <li></li> в котором есть класс соответсвующий игроку
+                        // тогда присвоить флагу "движение игрока" значение "взял из дома" для соответсвующего игрока
+                        this.isMoveWest1 = "home"
+                        this.isMoveWest2 = false
+                        this.isMoveWest3 = false
+                        this.isMoveWest4 = false
+                    }
+                })
+            }
         },
         handlePlayerWest2(e) {
             if (!this.isWestDice) return
             console.log("handlePlayerWest2", e)
-            e.path.map(el => {
-                if (el.nodeName === "LI" && el.className.includes("west-")) {
-                    this.isMoveWest1 = false
-                    this.isMoveWest2 = "home"
-                    this.isMoveWest3 = false
-                    this.isMoveWest4 = false
-                }
-            })
-            // this.isMoveWest1 = false
-            // this.isMoveWest2 = true
-            // this.isMoveWest3 = false
-            // this.isMoveWest4 = false
+            if (!this.isMoveWest2 && this.dice1 === this.dice2) {
+                e.path.map(el => {
+                    if (el.nodeName === "LI" && el.className.includes("west-")) {
+                        this.isMoveWest1 = false
+                        this.isMoveWest2 = "home"
+                        this.isMoveWest3 = false
+                        this.isMoveWest4 = false
+                    }
+                })
+            }
         },
         handlePlayerWest3(e) {
             if (!this.isWestDice) return
             console.log("handlePlayerWest3")
-            e.path.map(el => {
-                if (el.nodeName === "LI" && el.className.includes("west-")) {
-                    this.isMoveWest1 = false
-                    this.isMoveWest2 = false
-                    this.isMoveWest3 = "home"
-                    this.isMoveWest4 = false
-                }
-            })
-            // this.isMoveWest1 = false
-            // this.isMoveWest2 = false
-            // this.isMoveWest3 = true
-            // this.isMoveWest4 = false
+            if (!this.isMoveWest3 && this.dice1 === this.dice2) {
+                e.path.map(el => {
+                    if (el.nodeName === "LI" && el.className.includes("west-")) {
+                        this.isMoveWest1 = false
+                        this.isMoveWest2 = false
+                        this.isMoveWest3 = "home"
+                        this.isMoveWest4 = false
+                    }
+                })
+            }
         },
         handlePlayerWest4(e) {
             if (!this.isWestDice) return
             console.log("handlePlayerWest4")
-            e.path.map(el => {
-                if (el.nodeName === "LI" && el.className.includes("west-")) {
-                    this.isMoveWest1 = false
-                    this.isMoveWest2 = false
-                    this.isMoveWest3 = false
-                    this.isMoveWest4 = "home"
-                }
-            })
-            // this.isMoveWest1 = false
-            // this.isMoveWest2 = false
-            // this.isMoveWest3 = false
-            // this.isMoveWest4 = true
+            if (!this.isMoveWest4 && this.dice1 === this.dice2) {
+                e.path.map(el => {
+                    if (el.nodeName === "LI" && el.className.includes("west-")) {
+                        this.isMoveWest1 = false
+                        this.isMoveWest2 = false
+                        this.isMoveWest3 = false
+                        this.isMoveWest4 = "home"
+                    }
+                })
+            }
         },
 
         handlePlayerEast1(e) {
             if (!this.isEastDice) return
             console.log("handlePlayerEast1")
-            e.path.map(el => {
-                if (el.nodeName === "LI" && el.className.includes("east-")) {
-                    this.isMoveEast1 = "home"
-                    this.isMoveEast2 = false
-                    this.isMoveEast3 = false
-                    this.isMoveEast4 = false
-                }
-            })
-            // this.isMoveEast1 = true
-            // this.isMoveEast2 = false
-            // this.isMoveEast3 = false
-            // this.isMoveEast4 = false
+            if (!this.isMoveEast1 && this.dice1 === this.dice2) {
+                e.path.map(el => {
+                    if (el.nodeName === "LI" && el.className.includes("east-")) {
+                        this.isMoveEast1 = "home"
+                        this.isMoveEast2 = false
+                        this.isMoveEast3 = false
+                        this.isMoveEast4 = false
+                    }
+                })
+            }
         },
         handlePlayerEast2(e) {
             if (!this.isEastDice) return
             console.log("handlePlayerEast2", e)
-            e.path.map(el => {
-                if (el.nodeName === "LI" && el.className.includes("east-")) {
-                    this.isMoveEast1 = false
-                    this.isMoveEast2 = "home"
-                    this.isMoveEast3 = false
-                    this.isMoveEast4 = false
-                }
-            })
-            // this.isMoveEast1 = false
-            // this.isMoveEast2 = true
-            // this.isMoveEast3 = false
-            // this.isMoveEast4 = false
+            if (!this.isMoveEast2 && this.dice1 === this.dice2) {
+                e.path.map(el => {
+                    if (el.nodeName === "LI" && el.className.includes("east-")) {
+                        this.isMoveEast1 = false
+                        this.isMoveEast2 = "home"
+                        this.isMoveEast3 = false
+                        this.isMoveEast4 = false
+                    }
+                })
+            }
         },
         handlePlayerEast3(e) {
             if (!this.isEastDice) return
             console.log("handlePlayerEast3")
-            e.path.map(el => {
-                if (el.nodeName === "LI" && el.className.includes("east-")) {
-                    this.isMoveEast1 = false
-                    this.isMoveEast2 = false
-                    this.isMoveEast3 = "home"
-                    this.isMoveEast4 = false
-                }
-            })
-            // this.isMoveEast1 = false
-            // this.isMoveEast2 = false
-            // this.isMoveEast3 = true
-            // this.isMoveEast4 = false
+            if (!this.isMoveEast3 && this.dice1 === this.dice2) {
+                e.path.map(el => {
+                    if (el.nodeName === "LI" && el.className.includes("east-")) {
+                        this.isMoveEast1 = false
+                        this.isMoveEast2 = false
+                        this.isMoveEast3 = "home"
+                        this.isMoveEast4 = false
+                    }
+                })
+            }
         },
         handlePlayerEast4(e) {
             if (!this.isEastDice) return
             console.log("handlePlayerEast4")
-            e.path.map(el => {
-                if (el.nodeName === "LI" && el.className.includes("east-")) {
-                    this.isMoveEast1 = false
-                    this.isMoveEast2 = false
-                    this.isMoveEast3 = false
-                    this.isMoveEast4 = "home"
-                }
-            })
-            // this.isMoveEast1 = false
-            // this.isMoveEast2 = false
-            // this.isMoveEast3 = false
-            // this.isMoveEast4 = true
+            if (!this.isMoveEast4 && this.dice1 === this.dice2) {
+                e.path.map(el => {
+                    if (el.nodeName === "LI" && el.className.includes("east-")) {
+                        this.isMoveEast1 = false
+                        this.isMoveEast2 = false
+                        this.isMoveEast3 = false
+                        this.isMoveEast4 = "home"
+                    }
+                })
+            }
         },
 
         handlePlayerNorth1(e) {
             if (!this.isNorthDice) return
             console.log("handlePlayerNorth1")
-            e.path.map(el => {
-                if (el.nodeName === "LI" && el.className.includes("north-")) {
-                    this.isMoveNorth1 = "home"
-                    this.isMoveNorth2 = false
-                    this.isMoveNorth3 = false
-                    this.isMoveNorth4 = false
-                }
-            })
-            // this.isMoveNorth1 = true
-            // this.isMoveNorth2 = false
-            // this.isMoveNorth3 = false
-            // this.isMoveNorth4 = false
+            if (!this.isMoveNorth1 && this.dice1 === this.dice2) {
+                e.path.map(el => {
+                    if (el.nodeName === "LI" && el.className.includes("north-")) {
+                        this.isMoveNorth1 = "home"
+                        this.isMoveNorth2 = false
+                        this.isMoveNorth3 = false
+                        this.isMoveNorth4 = false
+                    }
+                })
+            }
         },
         handlePlayerNorth2(e) {
             if (!this.isNorthDice) return
             console.log("handlePlayerNorth2", e)
-            e.path.map(el => {
-                if (el.nodeName === "LI" && el.className.includes("north-")) {
-                    this.isMoveNorth1 = false
-                    this.isMoveNorth2 = "home"
-                    this.isMoveNorth3 = false
-                    this.isMoveNorth4 = false
-                }
-            })
-            // this.isMoveNorth1 = false
-            // this.isMoveNorth2 = true
-            // this.isMoveNorth3 = false
-            // this.isMoveNorth4 = false
+            if (!this.isMoveNorth2 && this.dice1 === this.dice2) {
+                e.path.map(el => {
+                    if (el.nodeName === "LI" && el.className.includes("north-")) {
+                        this.isMoveNorth1 = false
+                        this.isMoveNorth2 = "home"
+                        this.isMoveNorth3 = false
+                        this.isMoveNorth4 = false
+                    }
+                })
+            }
         },
         handlePlayerNorth3(e) {
             if (!this.isNorthDice) return
             console.log("handlePlayerNorth3")
-            e.path.map(el => {
-                if (el.nodeName === "LI" && el.className.includes("north-")) {
-                    this.isMoveNorth1 = false
-                    this.isMoveNorth2 = false
-                    this.isMoveNorth3 = "home"
-                    this.isMoveNorth4 = false
-                }
-            })
-            // this.isMoveNorth1 = false
-            // this.isMoveNorth2 = false
-            // this.isMoveNorth3 = true
-            // this.isMoveNorth4 = false
+            if (!this.isMoveNorth3 && this.dice1 === this.dice2) {
+                e.path.map(el => {
+                    if (el.nodeName === "LI" && el.className.includes("north-")) {
+                        this.isMoveNorth1 = false
+                        this.isMoveNorth2 = false
+                        this.isMoveNorth3 = "home"
+                        this.isMoveNorth4 = false
+                    }
+                })
+            }
         },
         handlePlayerNorth4(e) {
             if (!this.isNorthDice) return
             console.log("handlePlayerNorth4")
-            e.path.map(el => {
-                if (el.nodeName === "LI" && el.className.includes("north-")) {
-                    this.isMoveNorth1 = false
-                    this.isMoveNorth2 = false
-                    this.isMoveNorth3 = false
-                    this.isMoveNorth4 = "home"
-                }
-            })
-            // this.isMoveNorth1 = false
-            // this.isMoveNorth2 = false
-            // this.isMoveNorth3 = false
-            // this.isMoveNorth4 = true
+            if (!this.isMoveNorth4 && this.dice1 === this.dice2) {
+                e.path.map(el => {
+                    if (el.nodeName === "LI" && el.className.includes("north-")) {
+                        this.isMoveNorth1 = false
+                        this.isMoveNorth2 = false
+                        this.isMoveNorth3 = false
+                        this.isMoveNorth4 = "home"
+                    }
+                })
+            }
         },
 
         handlePlayerSouth1(e) {
             if (!this.isSouthDice) return
             console.log("handlePlayerSouth1")
-            e.path.map(el => {
-                if (el.nodeName === "LI" && el.className.includes("south-")) {
-                    this.isMoveSouth1 = "home"
-                    this.isMoveSouth2 = false
-                    this.isMoveSouth3 = false
-                    this.isMoveSouth4 = false
-                }
-            })
-            // this.isMoveSouth1 = true
-            // this.isMoveSouth2 = false
-            // this.isMoveSouth3 = false
-            // this.isMoveSouth4 = false
+            if (!this.isMoveSouth1 && this.dice1 === this.dice2) {
+                e.path.map(el => {
+                    if (el.nodeName === "LI" && el.className.includes("south-")) {
+                        this.isMoveSouth1 = "home"
+                        this.isMoveSouth2 = false
+                        this.isMoveSouth3 = false
+                        this.isMoveSouth4 = false
+                    }
+                })
+            }
         },
         handlePlayerSouth2(e) {
             if (!this.isSouthDice) return
             console.log("handlePlayerSouth2", e)
-            e.path.map(el => {
-                if (el.nodeName === "LI" && el.className.includes("south-")) {
-                    this.isMoveSouth1 = false
-                    this.isMoveSouth2 = "home"
-                    this.isMoveSouth3 = false
-                    this.isMoveSouth4 = false
-                }
-            })
-            // this.isMoveSouth1 = false
-            // this.isMoveSouth2 = true
-            // this.isMoveSouth3 = false
-            // this.isMoveSouth4 = false
+            if (!this.isMoveSouth2 && this.dice1 === this.dice2) {
+                e.path.map(el => {
+                    if (el.nodeName === "LI" && el.className.includes("south-")) {
+                        this.isMoveSouth1 = false
+                        this.isMoveSouth2 = "home"
+                        this.isMoveSouth3 = false
+                        this.isMoveSouth4 = false
+                    }
+                })
+            }
         },
         handlePlayerSouth3(e) {
             if (!this.isSouthDice) return
             console.log("handlePlayerSouth3")
-            e.path.map(el => {
-                if (el.nodeName === "LI" && el.className.includes("south-")) {
-                    this.isMoveSouth1 = false
-                    this.isMoveSouth2 = false
-                    this.isMoveSouth3 = "home"
-                    this.isMoveSouth4 = false
-                }
-            })
-            // this.isMoveSouth1 = false
-            // this.isMoveSouth2 = false
-            // this.isMoveSouth3 = true
-            // this.isMoveSouth4 = false
+            if (!this.isMoveSouth3 && this.dice1 === this.dice2) {
+                e.path.map(el => {
+                    if (el.nodeName === "LI" && el.className.includes("south-")) {
+                        this.isMoveSouth1 = false
+                        this.isMoveSouth2 = false
+                        this.isMoveSouth3 = "home"
+                        this.isMoveSouth4 = false
+                    }
+                })
+            }
         },
         handlePlayerSouth4(e) {
             if (!this.isSouthDice) return
             console.log("handlePlayerSouth4")
-            e.path.map(el => {
-                if (el.nodeName === "LI" && el.className.includes("south-")) {
-                    this.isMoveSouth1 = false
-                    this.isMoveSouth2 = false
-                    this.isMoveSouth3 = false
-                    this.isMoveSouth4 = "home"
-                }
-            })
-            // this.isMoveSouth1 = false
-            // this.isMoveSouth2 = false
-            // this.isMoveSouth3 = false
-            // this.isMoveSouth4 = true
+            if (!this.isMoveSouth4 && this.dice1 === this.dice2) {
+                e.path.map(el => {
+                    if (el.nodeName === "LI" && el.className.includes("south-")) {
+                        this.isMoveSouth1 = false
+                        this.isMoveSouth2 = false
+                        this.isMoveSouth3 = false
+                        this.isMoveSouth4 = "home"
+                    }
+                })
+            }
         },
     }
 }
