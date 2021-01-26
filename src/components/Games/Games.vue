@@ -48,55 +48,87 @@
             <li class="WENS__field-cell east-finish-4">ef4</li>
 
             <!-- фишки игрока -->
-            <li class="WENS__field-cell" :class="'pos-' + south.pos.n1" @click="handlePlayerSouth1">
+            <li class="WENS__field-cell"
+                :class="['pos-' + south.pos.n1, {active : south.move.n1.includes('home-go') || south.move.n1.includes('field-go')}]"
+                @click="handlePlayerSouth1">
                 <span class="player-south">s1</span>
             </li>
-            <li class="WENS__field-cell" :class="'pos-' + south.pos.n2" @click="handlePlayerSouth2">
+            <li class="WENS__field-cell"
+                :class="['pos-' + south.pos.n2, {active : south.move.n2.includes('home-go') || south.move.n2.includes('field-go')}]"
+                @click="handlePlayerSouth2">
                 <span class="player-south">s2</span>
             </li>
-            <li class="WENS__field-cell" :class="'pos-' + south.pos.n3" @click="handlePlayerSouth3">
+            <li class="WENS__field-cell"
+                :class="['pos-' + south.pos.n3, {active : south.move.n3.includes('home-go') || south.move.n3.includes('field-go')}]"
+                @click="handlePlayerSouth3">
                 <span class="player-south">s3</span>
             </li>
-            <li class="WENS__field-cell" :class="'pos-' + south.pos.n4" @click="handlePlayerSouth4">
+            <li class="WENS__field-cell"
+                :class="['pos-' + south.pos.n4, {active : south.move.n4.includes('home-go') || south.move.n4.includes('field-go')}]"
+                @click="handlePlayerSouth4">
                 <span class="player-south">s4</span>
             </li>
 
-            <li class="WENS__field-cell" :class="'pos-' + west.pos.n1" @click="handlePlayerWest1">
+            <li class="WENS__field-cell"
+                :class="['pos-' + west.pos.n1, {active : west.move.n1.includes('home-go') || west.move.n1.includes('field-go')}]"
+                @click="handlePlayerWest1">
                 <span class="player-west">w1</span>
             </li>
-            <li class="WENS__field-cell" :class="'pos-' + west.pos.n2" @click="handlePlayerWest2">
+            <li class="WENS__field-cell"
+                :class="['pos-' + west.pos.n2, {active : west.move.n2.includes('home-go') || west.move.n2.includes('field-go')}]"
+                @click="handlePlayerWest2">
                 <span class="player-west">w2</span>
             </li>
-            <li class="WENS__field-cell" :class="'pos-' + west.pos.n3" @click="handlePlayerWest3">
+            <li class="WENS__field-cell"
+                :class="['pos-' + west.pos.n3, {active : west.move.n3.includes('home-go') || west.move.n3.includes('field-go')}]"
+                @click="handlePlayerWest3">
                 <span class="player-west">w3</span>
             </li>
-            <li class="WENS__field-cell" :class="'pos-' + west.pos.n4" @click="handlePlayerWest4">
+            <li class="WENS__field-cell"
+                :class="['pos-' + west.pos.n4, {active : west.move.n4.includes('home-go') || west.move.n4.includes('field-go')}]"
+                @click="handlePlayerWest4">
                 <span class="player-west">w4</span>
             </li>
 
-            <li class="WENS__field-cell" :class="'pos-' + north.pos.n1" @click="handlePlayerNorth1">
+            <li class="WENS__field-cell"
+                :class="['pos-' + north.pos.n1, {active : north.move.n1.includes('home-go') || north.move.n1.includes('field-go')}]"
+                @click="handlePlayerNorth1">
                 <span class="player-north">n1</span>
             </li>
-            <li class="WENS__field-cell" :class="'pos-' + north.pos.n2" @click="handlePlayerNorth2">
+            <li class="WENS__field-cell"
+                :class="['pos-' + north.pos.n2, {active : north.move.n2.includes('home-go') || north.move.n2.includes('field-go')}]"
+                @click="handlePlayerNorth2">
                 <span class="player-north">n2</span>
             </li>
-            <li class="WENS__field-cell" :class="'pos-' + north.pos.n3" @click="handlePlayerNorth3">
+            <li class="WENS__field-cell"
+                :class="['pos-' + north.pos.n3, {active : north.move.n3.includes('home-go') || north.move.n3.includes('field-go')}]"
+                @click="handlePlayerNorth3">
                 <span class="player-north">n3</span>
             </li>
-            <li class="WENS__field-cell" :class="'pos-' + north.pos.n4" @click="handlePlayerNorth4">
+            <li class="WENS__field-cell"
+                :class="['pos-' + north.pos.n4, {active : north.move.n4.includes('home-go') || north.move.n4.includes('field-go')}]"
+                @click="handlePlayerNorth4">
                 <span class="player-north">n4</span>
             </li>
 
-            <li class="WENS__field-cell" :class="'pos-' + east.pos.n1" @click="handlePlayerEast1">
+            <li class="WENS__field-cell"
+                :class="['pos-' + east.pos.n1, {active : east.move.n1.includes('home-go') || east.move.n1.includes('field-go')}]"
+                @click="handlePlayerEast1">
                 <span class="player-east">e1</span>
             </li>
-            <li class="WENS__field-cell" :class="'pos-' + east.pos.n2" @click="handlePlayerEast2">
+            <li class="WENS__field-cell"
+                :class="['pos-' + east.pos.n2, {active : east.move.n2.includes('home-go') || east.move.n2.includes('field-go')}]"
+                @click="handlePlayerEast2">
                 <span class="player-east">e2</span>
             </li>
-            <li class="WENS__field-cell" :class="'pos-' + east.pos.n3" @click="handlePlayerEast3">
+            <li class="WENS__field-cell"
+                :class="['pos-' + east.pos.n3, {active : east.move.n3.includes('home-go') || east.move.n3.includes('field-go')}]"
+                @click="handlePlayerEast3">
                 <span class="player-east">e3</span>
             </li>
-            <li class="WENS__field-cell" :class="'pos-' + east.pos.n4" @click="handlePlayerEast4">
+            <li class="WENS__field-cell"
+                :class="['pos-' + east.pos.n4, {active : east.move.n4.includes('home-go') || east.move.n4.includes('field-go')}]"
+                @click="handlePlayerEast4">
                 <span class="player-east">e4</span>
             </li>
 
@@ -194,29 +226,35 @@ export default {
     methods: {
         handleRollDice() { // бросок кубика
             // рандомное значение кубиков
-            this.dice1 = Math.floor(1 + Math.random() * 6)
-            this.dice2 = Math.floor(1 + Math.random() * 6)
-            this.step = this.dice1 + this.dice2
+            if (this.step) return;
+            this.dice1 = Math.floor(1 + Math.random() * 6);
+            this.dice2 = Math.floor(1 + Math.random() * 6);
+            this.step = this.dice1 + this.dice2;
             // условие перехода хода
             if (this.dice1 !== this.dice2) { // если кубики не равны
+                this.diceInscription = "go";
                 if (this.isSouthDice && this.south.move.n1 === "home" && this.south.move.n2 === "home" && this.south.move.n3 === "home" && this.south.move.n4 === "home") { // если кубики бросает соответствующий игрок и все фишки игрока дома
-                    this.turn++
-                    this.diceInscription = "roll dice"
+                    this.turn++;
+                    this.diceInscription = "roll dice";
+                    this.step = 0;
                 }
                 if (this.isWestDice && this.west.move.n1 === "home" && this.west.move.n2 === "home" && this.west.move.n3 === "home" && this.west.move.n4 === "home") {
-                    this.turn++
-                    this.diceInscription = "roll dice"
+                    this.turn++;
+                    this.diceInscription = "roll dice";
+                    this.step = 0;
                 }
                 if (this.isNorthDice && this.north.move.n1 === "home" && this.north.move.n2 === "home" && this.north.move.n3 === "home" && this.north.move.n4 === "home") {
-                    this.turn++
-                    this.diceInscription = "roll dice"
+                    this.turn++;
+                    this.diceInscription = "roll dice";
+                    this.step = 0;
                 }
                 if (this.isEastDice && this.east.move.n1 === "home" && this.east.move.n2 === "home" && this.east.move.n3 === "home" && this.east.move.n4 === "home") {
-                    this.turn = 1
-                    this.diceInscription = "roll dice"
+                    this.turn = 1;
+                    this.diceInscription = "roll dice";
+                    this.step = 0;
                 }
             } else {
-                this.diceInscription = "go"
+                this.diceInscription = "go";
             }
             // if (this.turn === 1 || this.turn === 5) { // ходит юг
             //     this.turn = 1;
@@ -243,32 +281,36 @@ export default {
             }
         },
         moveToSouth() {
-            this.turn = 1
-            this.diceInscription = "roll dice"
+            this.turn = 1;
+            this.diceInscription = "roll dice";
+            this.step = 0;
             this.isSouthDice = true;
             this.isWestDice = false;
             this.isNorthDice = false;
             this.isEastDice = false;
         },
         moveToWest() {
-            this.turn++
-            this.diceInscription = "roll dice"
+            this.turn++;
+            this.diceInscription = "roll dice";
+            this.step = 0;
             this.isSouthDice = false;
             this.isWestDice = true;
             this.isNorthDice = false;
             this.isEastDice = false;
         },
         moveToNorth() {
-            this.turn++
-            this.diceInscription = "roll dice"
+            this.turn++;
+            this.diceInscription = "roll dice";
+            this.step = 0;
             this.isSouthDice = false;
             this.isWestDice = false;
             this.isNorthDice = true;
             this.isEastDice = false;
         },
         moveToEast() {
-            this.turn++
-            this.diceInscription = "roll dice"
+            this.turn++;
+            this.diceInscription = "roll dice";
+            this.step = 0;
             this.isSouthDice = false;
             this.isWestDice = false;
             this.isNorthDice = false;
@@ -277,22 +319,33 @@ export default {
         //typeof
         playerTurn(chipMove, clickOnFieldNumber, fieldNumber, player, chip) {
             if (chipMove === "home-go") { // если игрок находится дома
-                if (clickOnFieldNumber !== fieldNumber) return // после взятия фишки разрешаю становиться только в начало
+                if (clickOnFieldNumber !== fieldNumber) return; // после взятия фишки разрешаю становиться только в начало
                 this[player].pos[chip] = clickOnFieldNumber; // меняю позицию игрока
                 this[player].move[chip] = "field"; // даем статус фишке "поле"
-                player === "south" && this.moveToWest()
-                player === "west" && this.moveToNorth()
-                player === "north" && this.moveToEast()
-                player === "east" && this.moveToSouth()
+                player === "south" && this.moveToWest();
+                player === "west" && this.moveToNorth();
+                player === "north" && this.moveToEast();
+                player === "east" && this.moveToSouth();
             } else if (chipMove.includes("field-go")) {
-                const movePos = chipMove.split("from-")[1]
-                if (this.step && Number(clickOnFieldNumber) !== Number(movePos) + Number(this.dice1) && Number(clickOnFieldNumber) !== Number(movePos) + Number(this.dice2) && Number(clickOnFieldNumber) !== Number(movePos) + Number(this.step)) return
+                const chipPos = chipMove.split("from-")[1];
+                const isTwoDice = Number(clickOnFieldNumber) - Number(chipPos) !== Number(this.dice1) && Number(clickOnFieldNumber) - Number(chipPos) !== Number(this.dice2) && Number(clickOnFieldNumber) - Number(chipPos) !== Number(this.step);
+                if (isTwoDice) return;
                 this[player].pos[chip] = clickOnFieldNumber; // меняю позицию игрока
                 this[player].move[chip] = "field"; // даем статус фишке "поле"
-                player === "south" && this.moveToWest()
-                player === "west" && this.moveToNorth()
-                player === "north" && this.moveToEast()
-                player === "east" && this.moveToSouth()
+                if (this.step === Number(this.dice1) || this.step === Number(this.dice2)) {
+                    this.step = 0;
+                } else if (Number(clickOnFieldNumber) - Number(chipPos) === Number(this.dice1)) {
+                    this.step = this.step - Number(this.dice1);
+                } else if (Number(clickOnFieldNumber) - Number(chipPos) === Number(this.dice2)) {
+                    this.step = this.step - Number(this.dice2);
+                } else {
+                    this.step = 0;
+                }
+                if (this.step) return;
+                player === "south" && this.moveToWest();
+                player === "west" && this.moveToNorth();
+                player === "north" && this.moveToEast();
+                player === "east" && this.moveToSouth();
             }
         },
         handleFieldClick(e) { // клик по полю
@@ -432,6 +485,15 @@ export default {
             border: 0.2em solid black;
             cursor: pointer;
 
+            &.active {
+                .player-south,
+                .player-west,
+                .player-north,
+                .player-east {
+                    border-width: 0.8em;
+                }
+            }
+
             .player-south,
             .player-west,
             .player-north,
@@ -441,7 +503,9 @@ export default {
                 justify-content: center;
                 width: 100%;
                 height: 100%;
-                border: 1em solid white;
+                border-width: 1em;
+                border-style: solid;
+                border-color: white;
                 border-radius: 50%;
                 color: white;
                 cursor: pointer;
