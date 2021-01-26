@@ -48,55 +48,55 @@
             <li class="WENS__field-cell east-finish-4">ef4</li>
 
             <!-- фишки игрока -->
-            <li class="WENS__field-cell" :class="'pos-' + posSouth1" @click="handlePlayerSouth1">
+            <li class="WENS__field-cell" :class="'pos-' + south.pos.n1" @click="handlePlayerSouth1">
                 <span class="player-south">s1</span>
             </li>
-            <li class="WENS__field-cell" :class="'pos-' + posSouth2" @click="handlePlayerSouth2">
+            <li class="WENS__field-cell" :class="'pos-' + south.pos.n2" @click="handlePlayerSouth2">
                 <span class="player-south">s2</span>
             </li>
-            <li class="WENS__field-cell" :class="'pos-' + posSouth3" @click="handlePlayerSouth3">
+            <li class="WENS__field-cell" :class="'pos-' + south.pos.n3" @click="handlePlayerSouth3">
                 <span class="player-south">s3</span>
             </li>
-            <li class="WENS__field-cell" :class="'pos-' + posSouth4" @click="handlePlayerSouth4">
+            <li class="WENS__field-cell" :class="'pos-' + south.pos.n4" @click="handlePlayerSouth4">
                 <span class="player-south">s4</span>
             </li>
 
-            <li class="WENS__field-cell" :class="'pos-' + posWest1" @click="handlePlayerWest1">
+            <li class="WENS__field-cell" :class="'pos-' + west.pos.n1" @click="handlePlayerWest1">
                 <span class="player-west">w1</span>
             </li>
-            <li class="WENS__field-cell" :class="'pos-' + posWest2" @click="handlePlayerWest2">
+            <li class="WENS__field-cell" :class="'pos-' + west.pos.n2" @click="handlePlayerWest2">
                 <span class="player-west">w2</span>
             </li>
-            <li class="WENS__field-cell" :class="'pos-' + posWest3" @click="handlePlayerWest3">
+            <li class="WENS__field-cell" :class="'pos-' + west.pos.n3" @click="handlePlayerWest3">
                 <span class="player-west">w3</span>
             </li>
-            <li class="WENS__field-cell" :class="'pos-' + posWest4" @click="handlePlayerWest4">
+            <li class="WENS__field-cell" :class="'pos-' + west.pos.n4" @click="handlePlayerWest4">
                 <span class="player-west">w4</span>
             </li>
 
-            <li class="WENS__field-cell" :class="'pos-' + posNorth1" @click="handlePlayerNorth1">
+            <li class="WENS__field-cell" :class="'pos-' + north.pos.n1" @click="handlePlayerNorth1">
                 <span class="player-north">n1</span>
             </li>
-            <li class="WENS__field-cell" :class="'pos-' + posNorth2" @click="handlePlayerNorth2">
+            <li class="WENS__field-cell" :class="'pos-' + north.pos.n2" @click="handlePlayerNorth2">
                 <span class="player-north">n2</span>
             </li>
-            <li class="WENS__field-cell" :class="'pos-' + posNorth3" @click="handlePlayerNorth3">
+            <li class="WENS__field-cell" :class="'pos-' + north.pos.n3" @click="handlePlayerNorth3">
                 <span class="player-north">n3</span>
             </li>
-            <li class="WENS__field-cell" :class="'pos-' + posNorth4" @click="handlePlayerNorth4">
+            <li class="WENS__field-cell" :class="'pos-' + north.pos.n4" @click="handlePlayerNorth4">
                 <span class="player-north">n4</span>
             </li>
 
-            <li class="WENS__field-cell" :class="'pos-' + posEast1" @click="handlePlayerEast1">
+            <li class="WENS__field-cell" :class="'pos-' + east.pos.n1" @click="handlePlayerEast1">
                 <span class="player-east">e1</span>
             </li>
-            <li class="WENS__field-cell" :class="'pos-' + posEast2" @click="handlePlayerEast2">
+            <li class="WENS__field-cell" :class="'pos-' + east.pos.n2" @click="handlePlayerEast2">
                 <span class="player-east">e2</span>
             </li>
-            <li class="WENS__field-cell" :class="'pos-' + posEast3" @click="handlePlayerEast3">
+            <li class="WENS__field-cell" :class="'pos-' + east.pos.n3" @click="handlePlayerEast3">
                 <span class="player-east">e3</span>
             </li>
-            <li class="WENS__field-cell" :class="'pos-' + posEast4" @click="handlePlayerEast4">
+            <li class="WENS__field-cell" :class="'pos-' + east.pos.n4" @click="handlePlayerEast4">
                 <span class="player-east">e4</span>
             </li>
 
@@ -131,64 +131,87 @@ export default {
             isWestDice: false,
             isNorthDice: false,
             isEastDice: false,
-            // позиция фишек у каждого игрока
-            posSouth1: 'south-1',
-            posSouth2: 'south-2',
-            posSouth3: 'south-3',
-            posSouth4: 'south-4',
-            posWest1: 'west-1',
-            posWest2: 'west-2',
-            posWest3: 'west-3',
-            posWest4: 'west-4',
-            posNorth1: 'north-1',
-            posNorth2: 'north-2',
-            posNorth3: 'north-3',
-            posNorth4: 'north-4',
-            posEast1: 'east-1',
-            posEast2: 'east-2',
-            posEast3: 'east-3',
-            posEast4: 'east-4',
-            // флаг движения фишек у каждого игрока
-            isMoveSouth1: "home",
-            isMoveSouth2: "home",
-            isMoveSouth3: "home",
-            isMoveSouth4: "home",
-            isMoveWest1: "home",
-            isMoveWest2: "home",
-            isMoveWest3: "home",
-            isMoveWest4: "home",
-            isMoveNorth1: "home",
-            isMoveNorth2: "home",
-            isMoveNorth3: "home",
-            isMoveNorth4: "home",
-            isMoveEast1: "home",
-            isMoveEast2: "home",
-            isMoveEast3: "home",
-            isMoveEast4: "home",
+            south: {
+                // позиция фишек у игрока
+                pos: {
+                    n1: 'south-1',
+                    n2: 'south-2',
+                    n3: 'south-3',
+                    n4: 'south-4',
+                },
+                // флаг движения фишек у игрока
+                move: {
+                    n1: "home",
+                    n2: "home",
+                    n3: "home",
+                    n4: "home",
+                }
+            },
+            west: {
+                pos: {
+                    n1: 'west-1',
+                    n2: 'west-2',
+                    n3: 'west-3',
+                    n4: 'west-4',
+                },
+                move: {
+                    n1: "home",
+                    n2: "home",
+                    n3: "home",
+                    n4: "home",
+                }
+            },
+            north: {
+                pos: {
+                    n1: 'north-1',
+                    n2: 'north-2',
+                    n3: 'north-3',
+                    n4: 'north-4',
+                },
+                move: {
+                    n1: "home",
+                    n2: "home",
+                    n3: "home",
+                    n4: "home",
+                }
+            },
+            east: {
+                pos: {
+                    n1: 'east-1',
+                    n2: 'east-2',
+                    n3: 'east-3',
+                    n4: 'east-4',
+                },
+                move: {
+                    n1: "home",
+                    n2: "home",
+                    n3: "home",
+                    n4: "home",
+                }
+            },
         }
     },
     methods: {
         handleRollDice() { // бросок кубика
-            // console.log("handleRollDice", this.isWestDice)
             // рандомное значение кубиков
             this.dice1 = Math.floor(1 + Math.random() * 6)
             this.dice2 = Math.floor(1 + Math.random() * 6)
             this.step = this.dice1 + this.dice2
             // условие перехода хода
             if (this.dice1 !== this.dice2) { // если кубики не равны
-                if (this.isSouthDice && this.isMoveSouth1 === "home" && this.isMoveSouth2 === "home" && this.isMoveSouth3 === "home" && this.isMoveSouth4 === "home") { // если кубики бросает соответствующий игрок и все фишки игрока дома
+                if (this.isSouthDice && this.south.move.n1 === "home" && this.south.move.n2 === "home" && this.south.move.n3 === "home" && this.south.move.n4 === "home") { // если кубики бросает соответствующий игрок и все фишки игрока дома
                     this.turn++
                     this.diceInscription = "roll dice"
                 }
-                if (this.isWestDice && this.isMoveWest1 === "home" && this.isMoveWest2 === "home" && this.isMoveWest3 === "home" && this.isMoveWest4 === "home") {
+                if (this.isWestDice && this.west.move.n1 === "home" && this.west.move.n2 === "home" && this.west.move.n3 === "home" && this.west.move.n4 === "home") {
                     this.turn++
                     this.diceInscription = "roll dice"
                 }
-                if (this.isNorthDice && this.isMoveNorth1 === "home" && this.isMoveNorth2 === "home" && this.isMoveNorth3 === "home" && this.isMoveNorth4 === "home") {
+                if (this.isNorthDice && this.north.move.n1 === "home" && this.north.move.n2 === "home" && this.north.move.n3 === "home" && this.north.move.n4 === "home") {
                     this.turn++
                     this.diceInscription = "roll dice"
                 }
-                if (this.isEastDice && this.isMoveEast1 === "home" && this.isMoveEast2 === "home" && this.isMoveEast3 === "home" && this.isMoveEast4 === "home") {
+                if (this.isEastDice && this.east.move.n1 === "home" && this.east.move.n2 === "home" && this.east.move.n3 === "home" && this.east.move.n4 === "home") {
                     this.turn = 1
                     this.diceInscription = "roll dice"
                 }
@@ -220,7 +243,6 @@ export default {
             }
         },
         moveToSouth() {
-            // console.log("moveToSouth")
             this.turn = 1
             this.diceInscription = "roll dice"
             this.isSouthDice = true;
@@ -229,7 +251,6 @@ export default {
             this.isEastDice = false;
         },
         moveToWest() {
-            // console.log("moveToWest")
             this.turn++
             this.diceInscription = "roll dice"
             this.isSouthDice = false;
@@ -238,7 +259,6 @@ export default {
             this.isEastDice = false;
         },
         moveToNorth() {
-            // console.log("moveToNorth")
             this.turn++
             this.diceInscription = "roll dice"
             this.isSouthDice = false;
@@ -247,7 +267,6 @@ export default {
             this.isEastDice = false;
         },
         moveToEast() {
-            // console.log("moveToEast")
             this.turn++
             this.diceInscription = "roll dice"
             this.isSouthDice = false;
@@ -256,82 +275,11 @@ export default {
             this.isEastDice = true;
         },
         //typeof
-        playerTurn(chipMove, chipPosition, clickOnFieldNumber, fieldNumber, player, chip) {
+        playerTurn(chipMove, clickOnFieldNumber, fieldNumber, player, chip) {
             if (chipMove === "home-go") { // если игрок находится дома
                 if (clickOnFieldNumber !== fieldNumber) return // после взятия фишки разрешаю становиться только в начало
-                if (player === "south") {
-                    if (chip === "1") {
-                        this.posSouth1 = clickOnFieldNumber; // меняю позицию игрока
-                        this.isMoveSouth1 = "field"; // даем статус фишке "поле"
-                    }
-                    if (chip === "2") {
-                        this.posSouth2 = clickOnFieldNumber;
-                        this.isMoveSouth2 = "field";
-                    }
-                    if (chip === "3") {
-                        this.posSouth3 = clickOnFieldNumber;
-                        this.isMoveSouth3 = "field";
-                    }
-                    if (chip === "4") {
-                        this.posSouth4 = clickOnFieldNumber;
-                        this.isMoveSouth4 = "field";
-                    }
-                }
-                if (player === "west") {
-                    if (chip === "1") {
-                        this.posWest1 = clickOnFieldNumber;
-                        this.isMoveWest1 = "field";
-                    }
-                    if (chip === "2") {
-                        this.posWest2 = clickOnFieldNumber;
-                        this.isMoveWest2 = "field";
-                    }
-                    if (chip === "3") {
-                        this.posWest3 = clickOnFieldNumber;
-                        this.isMoveWest3 = "field";
-                    }
-                    if (chip === "4") {
-                        this.posWest4 = clickOnFieldNumber;
-                        this.isMoveWest4 = "field";
-                    }
-                }
-                if (player === "north") {
-                    if (chip === "1") {
-                        this.posNorth1 = clickOnFieldNumber;
-                        this.isMoveNorth1 = "field";
-                    }
-                    if (chip === "2") {
-                        this.posNorth2 = clickOnFieldNumber;
-                        this.isMoveNorth2 = "field";
-                    }
-                    if (chip === "3") {
-                        this.posNorth3 = clickOnFieldNumber;
-                        this.isMoveNorth3 = "field";
-                    }
-                    if (chip === "4") {
-                        this.posNorth4 = clickOnFieldNumber;
-                        this.isMoveNorth4 = "field";
-                    }
-                }
-                if (player === "east") {
-                    if (chip === "1") {
-                        this.posEast1 = clickOnFieldNumber;
-                        this.isMoveEast1 = "field";
-                    }
-                    if (chip === "2") {
-                        this.posEast2 = clickOnFieldNumber;
-                        this.isMoveEast2 = "field";
-                    }
-                    if (chip === "3") {
-                        this.posEast3 = clickOnFieldNumber;
-                        this.isMoveEast3 = "field";
-                    }
-                    if (chip === "4") {
-                        this.posEast4 = clickOnFieldNumber;
-                        this.isMoveEast4 = "field";
-                    }
-                }
-                // передаю ход дальше
+                this[player].pos[chip] = clickOnFieldNumber; // меняю позицию игрока
+                this[player].move[chip] = "field"; // даем статус фишке "поле"
                 player === "south" && this.moveToWest()
                 player === "west" && this.moveToNorth()
                 player === "north" && this.moveToEast()
@@ -339,78 +287,8 @@ export default {
             } else if (chipMove.includes("field-go")) {
                 const movePos = chipMove.split("from-")[1]
                 if (this.step && Number(clickOnFieldNumber) !== Number(movePos) + Number(this.dice1) && Number(clickOnFieldNumber) !== Number(movePos) + Number(this.dice2) && Number(clickOnFieldNumber) !== Number(movePos) + Number(this.step)) return
-                if (player === "south") {
-                    if (chip === "1") {
-                        this.posSouth1 = clickOnFieldNumber; // меняю позицию игрока
-                        this.isMoveSouth1 = "field"; // даем статус фишке "поле"
-                    }
-                    if (chip === "2") {
-                        this.posSouth2 = clickOnFieldNumber;
-                        this.isMoveSouth2 = "field";
-                    }
-                    if (chip === "3") {
-                        this.posSouth3 = clickOnFieldNumber;
-                        this.isMoveSouth3 = "field";
-                    }
-                    if (chip === "4") {
-                        this.posSouth4 = clickOnFieldNumber;
-                        this.isMoveSouth4 = "field";
-                    }
-                }
-                if (player === "west") {
-                    if (chip === "1") {
-                        this.posWest1 = clickOnFieldNumber;
-                        this.isMoveWest1 = "field";
-                    }
-                    if (chip === "2") {
-                        this.posWest2 = clickOnFieldNumber;
-                        this.isMoveWest2 = "field";
-                    }
-                    if (chip === "3") {
-                        this.posWest3 = clickOnFieldNumber;
-                        this.isMoveWest3 = "field";
-                    }
-                    if (chip === "4") {
-                        this.posWest4 = clickOnFieldNumber;
-                        this.isMoveWest4 = "field";
-                    }
-                }
-                if (player === "north") {
-                    if (chip === "1") {
-                        this.posNorth1 = clickOnFieldNumber;
-                        this.isMoveNorth1 = "field";
-                    }
-                    if (chip === "2") {
-                        this.posNorth2 = clickOnFieldNumber;
-                        this.isMoveNorth2 = "field";
-                    }
-                    if (chip === "3") {
-                        this.posNorth3 = clickOnFieldNumber;
-                        this.isMoveNorth3 = "field";
-                    }
-                    if (chip === "4") {
-                        this.posNorth4 = clickOnFieldNumber;
-                        this.isMoveNorth4 = "field";
-                    }
-                }
-                if (player === "east") {
-                    if (chip === "1") {
-                        this.posEast1 = clickOnFieldNumber;
-                        this.isMoveEast1 = "field";
-                    }
-                    if (chip === "2") {
-                        this.posEast2 = clickOnFieldNumber;
-                        this.isMoveEast2 = "field";
-                    }
-                    if (chip === "3") {
-                        this.posEast3 = clickOnFieldNumber;
-                        this.isMoveEast3 = "field";
-                    }
-                    if (chip === "4") {
-                        this.posEast4 = clickOnFieldNumber;
-                        this.isMoveEast4 = "field";
-                    }
-                }
+                this[player].pos[chip] = clickOnFieldNumber; // меняю позицию игрока
+                this[player].move[chip] = "field"; // даем статус фишке "поле"
                 player === "south" && this.moveToWest()
                 player === "west" && this.moveToNorth()
                 player === "north" && this.moveToEast()
@@ -418,480 +296,105 @@ export default {
             }
         },
         handleFieldClick(e) { // клик по полю
-            // console.log("handleFieldClick", e)
             const clickOnFieldNumber = e.target.classList[1].split("-")[1]
-            this.playerTurn(this.isMoveSouth1, this.posSouth1, clickOnFieldNumber, "0", "south", "1")
-            this.playerTurn(this.isMoveSouth2, this.posSouth2, clickOnFieldNumber, "0", "south", "2")
-            this.playerTurn(this.isMoveSouth3, this.posSouth3, clickOnFieldNumber, "0", "south", "3")
-            this.playerTurn(this.isMoveSouth4, this.posSouth4, clickOnFieldNumber, "0", "south", "4")
+            this.playerTurn(this.south.move.n1, clickOnFieldNumber, "0", "south", "n1")
+            this.playerTurn(this.south.move.n2, clickOnFieldNumber, "0", "south", "n2")
+            this.playerTurn(this.south.move.n3, clickOnFieldNumber, "0", "south", "n3")
+            this.playerTurn(this.south.move.n4, clickOnFieldNumber, "0", "south", "n4")
 
-            this.playerTurn(this.isMoveWest1, this.posWest1, clickOnFieldNumber, "14", "west", "1")
-            this.playerTurn(this.isMoveWest2, this.posWest2, clickOnFieldNumber, "14", "west", "2")
-            this.playerTurn(this.isMoveWest3, this.posWest3, clickOnFieldNumber, "14", "west", "3")
-            this.playerTurn(this.isMoveWest4, this.posWest4, clickOnFieldNumber, "14", "west", "4")
+            this.playerTurn(this.west.move.n1, clickOnFieldNumber, "14", "west", "n1")
+            this.playerTurn(this.west.move.n2, clickOnFieldNumber, "14", "west", "n2")
+            this.playerTurn(this.west.move.n3, clickOnFieldNumber, "14", "west", "n3")
+            this.playerTurn(this.west.move.n4, clickOnFieldNumber, "14", "west", "n4")
 
-            this.playerTurn(this.isMoveNorth1, this.posNorth1, clickOnFieldNumber, "28", "north", "1")
-            this.playerTurn(this.isMoveNorth2, this.posNorth2, clickOnFieldNumber, "28", "north", "2")
-            this.playerTurn(this.isMoveNorth3, this.posNorth3, clickOnFieldNumber, "28", "north", "3")
-            this.playerTurn(this.isMoveNorth4, this.posNorth4, clickOnFieldNumber, "28", "north", "4")
+            this.playerTurn(this.north.move.n1, clickOnFieldNumber, "28", "north", "n1")
+            this.playerTurn(this.north.move.n2, clickOnFieldNumber, "28", "north", "n2")
+            this.playerTurn(this.north.move.n3, clickOnFieldNumber, "28", "north", "n3")
+            this.playerTurn(this.north.move.n4, clickOnFieldNumber, "28", "north", "n4")
 
-            this.playerTurn(this.isMoveEast1, this.posEast1, clickOnFieldNumber, "42", "east", "1")
-            this.playerTurn(this.isMoveEast2, this.posEast2, clickOnFieldNumber, "42", "east", "2")
-            this.playerTurn(this.isMoveEast3, this.posEast3, clickOnFieldNumber, "42", "east", "3")
-            this.playerTurn(this.isMoveEast4, this.posEast4, clickOnFieldNumber, "42", "east", "4")
+            this.playerTurn(this.east.move.n1, clickOnFieldNumber, "42", "east", "n1")
+            this.playerTurn(this.east.move.n2, clickOnFieldNumber, "42", "east", "n2")
+            this.playerTurn(this.east.move.n3, clickOnFieldNumber, "42", "east", "n3")
+            this.playerTurn(this.east.move.n4, clickOnFieldNumber, "42", "east", "n4")
+        },
+
+        handlePlayer(e, chipMove, player, chip) { // клик по игроку
+            if (chipMove === "home" && this.dice1 === this.dice2) { // если фишка дома и на кубиках дубль
+                e.path.map(el => {
+                    if (el.nodeName === "SPAN" && el.className.includes(player)) { // если это тег <li></li> в котором есть класс соответсвующий игроку
+                        // тогда присвоить флагу "движение игрока" значение "взял из дома" для соответсвующего игрока
+                        this[player].move.n1 = "home"
+                        this[player].move.n2 = "home"
+                        this[player].move.n3 = "home"
+                        this[player].move.n4 = "home"
+                        this[player].move[chip] = "home-go"
+                    }
+                })
+            } else if (chipMove === "home" && this.dice1 !== this.dice2) { // если фишка дома и на кубиках нет дубль
+                return;
+            } else { // если фишка не дома
+                e.path.map(el => {
+                    if (el.nodeName === "SPAN" && el.className.includes(player)) { // если это тег <li></li> в котором есть класс соответсвующий игроку
+                        // тогда присвоить флагу "движение игрока" значение "взял с поля" для соответсвующего игрока
+                        this[player].move[chip] = "field-go-from-"
+                    }
+                    if (el.nodeName === "LI") {
+                        this[player].move[chip] = this[player].move[chip] + el.className.split("pos-")[1]
+                    }
+                })
+            }
         },
 
         handlePlayerSouth1(e) { // клик по игроку
-            if (!this.isSouthDice) return // если не твой ход, выйди
-            if (this.isMoveSouth1 === "home" && this.dice1 === this.dice2) { // если фишка дома и на кубиках дубль
-                e.path.map(el => {
-                    if (el.nodeName === "SPAN" && el.className.includes("south")) { // если это тег <li></li> в котором есть класс соответсвующий игроку
-                        // тогда присвоить флагу "движение игрока" значение "взял из дома" для соответсвующего игрока
-                        this.isMoveSouth1 = "home-go"
-                        this.isMoveSouth2 = "home"
-                        this.isMoveSouth3 = "home"
-                        this.isMoveSouth4 = "home"
-                    }
-                })
-            } else if (this.isMoveSouth1 === "home" && this.dice1 !== this.dice2) {
-                return;
-            } else {
-                console.log("handlePlayerSouth1", e)
-                e.path.map(el => {
-                    if (el.nodeName === "SPAN" && el.className.includes("south")) { // если это тег <li></li> в котором есть класс соответсвующий игроку
-                        // тогда присвоить флагу "движение игрока" значение "взял с поля" для соответсвующего игрока
-                        this.isMoveSouth1 = "field-go-from-"
-                        this.isMoveSouth2 = "field"
-                        this.isMoveSouth3 = "field"
-                        this.isMoveSouth4 = "field"
-                    }
-                    if (el.nodeName === "LI") {
-                        this.isMoveSouth1 = this.isMoveSouth1 + el.className.split("pos-")[1]
-                    }
-                })
-            }
+            this.handlePlayer(e, this.south.move.n1, "south", "n1")
         },
         handlePlayerSouth2(e) {
-            if (!this.isSouthDice) return
-            console.log("handlePlayerSouth2", e)
-            if (this.isMoveSouth2 === "home" && this.dice1 === this.dice2) {
-                e.path.map(el => {
-                    if (el.nodeName === "SPAN" && el.className.includes("south")) {
-                        this.isMoveSouth1 = "home"
-                        this.isMoveSouth2 = "home-go"
-                        this.isMoveSouth3 = "home"
-                        this.isMoveSouth4 = "home"
-                    }
-                })
-            } else if (this.isMoveSouth2 === "home" && this.dice1 !== this.dice2) {
-                return;
-            } else {
-                e.path.map(el => {
-                    if (el.nodeName === "SPAN" && el.className.includes("south")) {
-                        this.isMoveSouth1 = "field"
-                        this.isMoveSouth2 = "field-go-from-"
-                        this.isMoveSouth3 = "field"
-                        this.isMoveSouth4 = "field"
-                    }
-                    if (el.nodeName === "LI") {
-                        this.isMoveSouth2 = this.isMoveSouth2 + el.className.split("pos-")[1]
-                    }
-                })
-            }
+            this.handlePlayer(e, this.south.move.n2, "south", "n2")
         },
         handlePlayerSouth3(e) {
-            if (!this.isSouthDice) return
-            console.log("handlePlayerSouth3")
-            if (this.isMoveSouth3 === "home" && this.dice1 === this.dice2) {
-                e.path.map(el => {
-                    if (el.nodeName === "SPAN" && el.className.includes("south")) {
-                        this.isMoveSouth1 = "home"
-                        this.isMoveSouth2 = "home"
-                        this.isMoveSouth3 = "home-go"
-                        this.isMoveSouth4 = "home"
-                    }
-                })
-            } else if (this.isMoveSouth3 === "home" && this.dice1 !== this.dice2) {
-                return;
-            } else {
-                e.path.map(el => {
-                    if (el.nodeName === "SPAN" && el.className.includes("south")) {
-                        this.isMoveSouth1 = "field"
-                        this.isMoveSouth2 = "field"
-                        this.isMoveSouth3 = "field-go-from-"
-                        this.isMoveSouth4 = "field"
-                    }
-                    if (el.nodeName === "LI") {
-                        this.isMoveSouth3 = this.isMoveSouth3 + el.className.split("pos-")[1]
-                    }
-                })
-            }
+            this.handlePlayer(e, this.south.move.n3, "south", "n3")
         },
         handlePlayerSouth4(e) {
-            if (!this.isSouthDice) return
-            console.log("handlePlayerSouth4")
-            if (this.isMoveSouth4 === "home" && this.dice1 === this.dice2) {
-                e.path.map(el => {
-                    if (el.nodeName === "SPAN" && el.className.includes("south")) {
-                        this.isMoveSouth1 = "home"
-                        this.isMoveSouth2 = "home"
-                        this.isMoveSouth3 = "home"
-                        this.isMoveSouth4 = "home-go"
-                    }
-                })
-            } else if (this.isMoveSouth4 === "home" && this.dice1 !== this.dice2) {
-                return;
-            } else {
-                e.path.map(el => {
-                    if (el.nodeName === "SPAN" && el.className.includes("south")) {
-                        this.isMoveSouth1 = "field"
-                        this.isMoveSouth2 = "field"
-                        this.isMoveSouth3 = "field"
-                        this.isMoveSouth4 = "field-go-from-"
-                    }
-                    if (el.nodeName === "LI") {
-                        this.isMoveSouth4 = this.isMoveSouth4 + el.className.split("pos-")[1]
-                    }
-                })
-            }
+            this.handlePlayer(e, this.south.move.n4, "south", "n4")
         },
+
         handlePlayerWest1(e) {
-            if (!this.isWestDice) return
-            if (this.isMoveWest1 === "home" && this.dice1 === this.dice2) {
-                e.path.map(el => {
-                    if (el.nodeName === "SPAN" && el.className.includes("west")) {
-                        this.isMoveWest1 = "home-go"
-                        this.isMoveWest2 = "home"
-                        this.isMoveWest3 = "home"
-                        this.isMoveWest4 = "home"
-                    }
-                })
-            } else if (this.isMoveWest1 === "home" && this.dice1 !== this.dice2) {
-                return;
-            } else {
-                console.log("handlePlayerWest1", e)
-                e.path.map(el => {
-                    if (el.nodeName === "SPAN" && el.className.includes("west")) {
-                        this.isMoveWest1 = "field-go-from-"
-                        this.isMoveWest2 = "field"
-                        this.isMoveWest3 = "field"
-                        this.isMoveWest4 = "field"
-                    }
-                    if (el.nodeName === "LI") {
-                        this.isMoveWest1 = this.isMoveWest1 + el.className.split("pos-")[1]
-                    }
-                })
-            }
+            this.handlePlayer(e, this.west.move.n1, "west", "n1")
         },
         handlePlayerWest2(e) {
-            if (!this.isWestDice) return
-            console.log("handlePlayerWest2", e)
-            if (this.isMoveWest2 === "home" && this.dice1 === this.dice2) {
-                e.path.map(el => {
-                    if (el.nodeName === "SPAN" && el.className.includes("west")) {
-                        this.isMoveWest1 = "home"
-                        this.isMoveWest2 = "home-go"
-                        this.isMoveWest3 = "home"
-                        this.isMoveWest4 = "home"
-                    }
-                })
-            } else if (this.isMoveWest2 === "home" && this.dice1 !== this.dice2) {
-                return;
-            } else {
-                e.path.map(el => {
-                    if (el.nodeName === "SPAN" && el.className.includes("west")) {
-                        this.isMoveWest1 = "field"
-                        this.isMoveWest2 = "field-go-from-"
-                        this.isMoveWest3 = "field"
-                        this.isMoveWest4 = "field"
-                    }
-                    if (el.nodeName === "LI") {
-                        this.isMoveWest2 = this.isMoveWest2 + el.className.split("pos-")[1]
-                    }
-                })
-            }
+            this.handlePlayer(e, this.west.move.n2, "west", "n2")
         },
         handlePlayerWest3(e) {
-            if (!this.isWestDice) return
-            console.log("handlePlayerWest3")
-            if (this.isMoveWest3 === "home" && this.dice1 === this.dice2) {
-                e.path.map(el => {
-                    if (el.nodeName === "SPAN" && el.className.includes("west")) {
-                        this.isMoveWest1 = "home"
-                        this.isMoveWest2 = "home"
-                        this.isMoveWest3 = "home-go"
-                        this.isMoveWest4 = "home"
-                    }
-                })
-            } else if (this.isMoveWest3 === "home" && this.dice1 !== this.dice2) {
-                return;
-            } else {
-                e.path.map(el => {
-                    if (el.nodeName === "SPAN" && el.className.includes("west")) {
-                        this.isMoveWest1 = "field"
-                        this.isMoveWest2 = "field"
-                        this.isMoveWest3 = "field-go-from-"
-                        this.isMoveWest4 = "field"
-                    }
-                    if (el.nodeName === "LI") {
-                        this.isMoveWest3 = this.isMoveWest3 + el.className.split("pos-")[1]
-                    }
-                })
-            }
+            this.handlePlayer(e, this.west.move.n3, "west", "n3")
         },
         handlePlayerWest4(e) {
-            if (!this.isWestDice) return
-            console.log("handlePlayerWest4")
-            if (this.isMoveWest4 === "home" && this.dice1 === this.dice2) {
-                e.path.map(el => {
-                    if (el.nodeName === "SPAN" && el.className.includes("west")) {
-                        this.isMoveWest1 = "home"
-                        this.isMoveWest2 = "home"
-                        this.isMoveWest3 = "home"
-                        this.isMoveWest4 = "home-go"
-                    }
-                })
-            } else if (this.isMoveWest4 === "home" && this.dice1 !== this.dice2) {
-                return;
-            } else {
-                e.path.map(el => {
-                    if (el.nodeName === "SPAN" && el.className.includes("west")) {
-                        this.isMoveWest1 = "field"
-                        this.isMoveWest2 = "field"
-                        this.isMoveWest3 = "field"
-                        this.isMoveWest4 = "field-go-from-"
-                    }
-                    if (el.nodeName === "LI") {
-                        this.isMoveWest4 = this.isMoveWest4 + el.className.split("pos-")[1]
-                    }
-                })
-            }
+            this.handlePlayer(e, this.west.move.n4, "west", "n4")
         },
 
         handlePlayerNorth1(e) {
-            if (!this.isNorthDice) return
-            if (this.isMoveNorth1 === "home" && this.dice1 === this.dice2) {
-                e.path.map(el => {
-                    if (el.nodeName === "SPAN" && el.className.includes("north")) {
-                        this.isMoveNorth1 = "home-go"
-                        this.isMoveNorth2 = "home"
-                        this.isMoveNorth3 = "home"
-                        this.isMoveNorth4 = "home"
-                    }
-                })
-            } else if (this.isMoveNorth1 === "home" && this.dice1 !== this.dice2) {
-                return;
-            } else {
-                console.log("handlePlayerNorth1", e)
-                e.path.map(el => {
-                    if (el.nodeName === "SPAN" && el.className.includes("north")) {
-                        this.isMoveNorth1 = "field-go-from-"
-                        this.isMoveNorth2 = "field"
-                        this.isMoveNorth3 = "field"
-                        this.isMoveNorth4 = "field"
-                    }
-                    if (el.nodeName === "LI") {
-                        this.isMoveNorth1 = this.isMoveNorth1 + el.className.split("pos-")[1]
-                    }
-                })
-            }
+            this.handlePlayer(e, this.north.move.n1, "north", "n1")
         },
         handlePlayerNorth2(e) {
-            if (!this.isNorthDice) return
-            console.log("handlePlayerNorth2", e)
-            if (this.isMoveNorth2 === "home" && this.dice1 === this.dice2) {
-                e.path.map(el => {
-                    if (el.nodeName === "SPAN" && el.className.includes("north")) {
-                        this.isMoveNorth1 = "home"
-                        this.isMoveNorth2 = "home-go"
-                        this.isMoveNorth3 = "home"
-                        this.isMoveNorth4 = "home"
-                    }
-                })
-            } else if (this.isMoveNorth2 === "home" && this.dice1 !== this.dice2) {
-                return;
-            } else {
-                e.path.map(el => {
-                    if (el.nodeName === "SPAN" && el.className.includes("north")) {
-                        this.isMoveNorth1 = "field"
-                        this.isMoveNorth2 = "field-go-from-"
-                        this.isMoveNorth3 = "field"
-                        this.isMoveNorth4 = "field"
-                    }
-                    if (el.nodeName === "LI") {
-                        this.isMoveNorth2 = this.isMoveNorth2 + el.className.split("pos-")[1]
-                    }
-                })
-            }
+            this.handlePlayer(e, this.north.move.n2, "north", "n2")
         },
         handlePlayerNorth3(e) {
-            if (!this.isNorthDice) return
-            console.log("handlePlayerNorth3")
-            if (this.isMoveNorth3 === "home" && this.dice1 === this.dice2) {
-                e.path.map(el => {
-                    if (el.nodeName === "SPAN" && el.className.includes("north")) {
-                        this.isMoveNorth1 = "home"
-                        this.isMoveNorth2 = "home"
-                        this.isMoveNorth3 = "home-go"
-                        this.isMoveNorth4 = "home"
-                    }
-                })
-            } else if (this.isMoveNorth3 === "home" && this.dice1 !== this.dice2) {
-                return;
-            } else {
-                e.path.map(el => {
-                    if (el.nodeName === "SPAN" && el.className.includes("north")) {
-                        this.isMoveNorth1 = "field"
-                        this.isMoveNorth2 = "field"
-                        this.isMoveNorth3 = "field-go-from-"
-                        this.isMoveNorth4 = "field"
-                    }
-                    if (el.nodeName === "LI") {
-                        this.isMoveNorth3 = this.isMoveNorth3 + el.className.split("pos-")[1]
-                    }
-                })
-            }
+            this.handlePlayer(e, this.north.move.n3, "north", "n3")
         },
         handlePlayerNorth4(e) {
-            if (!this.isNorthDice) return
-            console.log("handlePlayerNorth4")
-            if (this.isMoveNorth4 === "home" && this.dice1 === this.dice2) {
-                e.path.map(el => {
-                    if (el.nodeName === "SPAN" && el.className.includes("north")) {
-                        this.isMoveNorth1 = "home"
-                        this.isMoveNorth2 = "home"
-                        this.isMoveNorth3 = "home"
-                        this.isMoveNorth4 = "home-go"
-                    }
-                })
-            } else if (this.isMoveNorth4 === "home" && this.dice1 !== this.dice2) {
-                return;
-            } else {
-                e.path.map(el => {
-                    if (el.nodeName === "SPAN" && el.className.includes("north")) {
-                        this.isMoveNorth1 = "field"
-                        this.isMoveNorth2 = "field"
-                        this.isMoveNorth3 = "field"
-                        this.isMoveNorth4 = "field-go-from-"
-                    }
-                    if (el.nodeName === "LI") {
-                        this.isMoveNorth4 = this.isMoveNorth4 + el.className.split("pos-")[1]
-                    }
-                })
-            }
+            this.handlePlayer(e, this.north.move.n4, "north", "n4")
         },
 
         handlePlayerEast1(e) {
-            if (!this.isEastDice) return
-            if (this.isMoveEast1 === "home" && this.dice1 === this.dice2) {
-                e.path.map(el => {
-                    if (el.nodeName === "SPAN" && el.className.includes("east")) {
-                        this.isMoveEast1 = "home-go"
-                        this.isMoveEast2 = "home"
-                        this.isMoveEast3 = "home"
-                        this.isMoveEast4 = "home"
-                    }
-                })
-            } else if (this.isMoveEast1 === "home" && this.dice1 !== this.dice2) {
-                return;
-            } else {
-                console.log("handlePlayerEast1", e)
-                e.path.map(el => {
-                    if (el.nodeName === "SPAN" && el.className.includes("east")) {
-                        this.isMoveEast1 = "field-go-from-"
-                        this.isMoveEast2 = "field"
-                        this.isMoveEast3 = "field"
-                        this.isMoveEast4 = "field"
-                    }
-                    if (el.nodeName === "LI") {
-                        this.isMoveEast1 = this.isMoveEast1 + el.className.split("pos-")[1]
-                    }
-                })
-            }
+            this.handlePlayer(e, this.east.move.n1, "east", "n1")
         },
         handlePlayerEast2(e) {
-            if (!this.isEastDice) return
-            console.log("handlePlayerEast2", e)
-            if (this.isMoveEast2 === "home" && this.dice1 === this.dice2) {
-                e.path.map(el => {
-                    if (el.nodeName === "SPAN" && el.className.includes("east")) {
-                        this.isMoveEast1 = "home"
-                        this.isMoveEast2 = "home-go"
-                        this.isMoveEast3 = "home"
-                        this.isMoveEast4 = "home"
-                    }
-                })
-            } else if (this.isMoveEast2 === "home" && this.dice1 !== this.dice2) {
-                return;
-            } else {
-                e.path.map(el => {
-                    if (el.nodeName === "SPAN" && el.className.includes("east")) {
-                        this.isMoveEast1 = "field"
-                        this.isMoveEast2 = "field-go-from-"
-                        this.isMoveEast3 = "field"
-                        this.isMoveEast4 = "field"
-                    }
-                    if (el.nodeName === "LI") {
-                        this.isMoveEast2 = this.isMoveEast2 + el.className.split("pos-")[1]
-                    }
-                })
-            }
+            this.handlePlayer(e, this.east.move.n2, "east", "n2")
         },
         handlePlayerEast3(e) {
-            if (!this.isEastDice) return
-            console.log("handlePlayerEast3")
-            if (this.isMoveEast3 === "home" && this.dice1 === this.dice2) {
-                e.path.map(el => {
-                    if (el.nodeName === "SPAN" && el.className.includes("east")) {
-                        this.isMoveEast1 = "home"
-                        this.isMoveEast2 = "home"
-                        this.isMoveEast3 = "home-go"
-                        this.isMoveEast4 = "home"
-                    }
-                })
-            } else if (this.isMoveEast3 === "home" && this.dice1 !== this.dice2) {
-                return;
-            } else {
-                e.path.map(el => {
-                    if (el.nodeName === "SPAN" && el.className.includes("east")) {
-                        this.isMoveEast1 = "field"
-                        this.isMoveEast2 = "field"
-                        this.isMoveEast3 = "field-go-from-"
-                        this.isMoveEast4 = "field"
-                    }
-                    if (el.nodeName === "LI") {
-                        this.isMoveEast3 = this.isMoveEast3 + el.className.split("pos-")[1]
-                    }
-                })
-            }
+            this.handlePlayer(e, this.east.move.n3, "east", "n3")
         },
         handlePlayerEast4(e) {
-            if (!this.isEastDice) return
-            console.log("handlePlayerEast4")
-            if (this.isMoveEast4 === "home" && this.dice1 === this.dice2) {
-                e.path.map(el => {
-                    if (el.nodeName === "SPAN" && el.className.includes("east")) {
-                        this.isMoveEast1 = "home"
-                        this.isMoveEast2 = "home"
-                        this.isMoveEast3 = "home"
-                        this.isMoveEast4 = "home-go"
-                    }
-                })
-            } else if (this.isMoveEast4 === "home" && this.dice1 !== this.dice2) {
-                return;
-            } else {
-                e.path.map(el => {
-                    if (el.nodeName === "SPAN" && el.className.includes("east")) {
-                        this.isMoveEast1 = "field"
-                        this.isMoveEast2 = "field"
-                        this.isMoveEast3 = "field"
-                        this.isMoveEast4 = "field-go-from-"
-                    }
-                    if (el.nodeName === "LI") {
-                        this.isMoveEast4 = this.isMoveEast4 + el.className.split("pos-")[1]
-                    }
-                })
-            }
+            this.handlePlayer(e, this.east.move.n4, "east", "n4")
         },
     }
 }
