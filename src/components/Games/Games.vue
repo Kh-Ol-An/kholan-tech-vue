@@ -157,6 +157,8 @@ export default {
             dice2: 6,
             diceInscription: "roll dice",
             turn: 1,
+            step1: 0,
+            step2: 0,
             step: 0,
             // расположение кнопки кубика
             isSouthDice: true,
@@ -229,28 +231,38 @@ export default {
             if (this.step) return;
             this.dice1 = Math.floor(1 + Math.random() * 6);
             this.dice2 = Math.floor(1 + Math.random() * 6);
-            this.step = this.dice1 + this.dice2;
+            this.step1 = Number(this.dice1);
+            this.step2 = Number(this.dice2);
+            this.step = Number(this.dice1) + Number(this.dice2);
             // условие перехода хода
             if (this.dice1 !== this.dice2) { // если кубики не равны
                 this.diceInscription = "go";
                 if (this.isSouthDice && this.south.move.n1 === "home" && this.south.move.n2 === "home" && this.south.move.n3 === "home" && this.south.move.n4 === "home") { // если кубики бросает соответствующий игрок и все фишки игрока дома
                     this.turn++;
                     this.diceInscription = "roll dice";
+                    this.step1 = 0;
+                    this.step2 = 0;
                     this.step = 0;
                 }
                 if (this.isWestDice && this.west.move.n1 === "home" && this.west.move.n2 === "home" && this.west.move.n3 === "home" && this.west.move.n4 === "home") {
                     this.turn++;
                     this.diceInscription = "roll dice";
+                    this.step1 = 0;
+                    this.step2 = 0;
                     this.step = 0;
                 }
                 if (this.isNorthDice && this.north.move.n1 === "home" && this.north.move.n2 === "home" && this.north.move.n3 === "home" && this.north.move.n4 === "home") {
                     this.turn++;
                     this.diceInscription = "roll dice";
+                    this.step1 = 0;
+                    this.step2 = 0;
                     this.step = 0;
                 }
                 if (this.isEastDice && this.east.move.n1 === "home" && this.east.move.n2 === "home" && this.east.move.n3 === "home" && this.east.move.n4 === "home") {
                     this.turn = 1;
                     this.diceInscription = "roll dice";
+                    this.step1 = 0;
+                    this.step2 = 0;
                     this.step = 0;
                 }
             } else {
@@ -283,6 +295,8 @@ export default {
         moveToSouth() {
             this.turn = 1;
             this.diceInscription = "roll dice";
+            this.step1 = 0;
+            this.step2 = 0;
             this.step = 0;
             this.isSouthDice = true;
             this.isWestDice = false;
@@ -292,6 +306,8 @@ export default {
         moveToWest() {
             this.turn++;
             this.diceInscription = "roll dice";
+            this.step1 = 0;
+            this.step2 = 0;
             this.step = 0;
             this.isSouthDice = false;
             this.isWestDice = true;
@@ -301,6 +317,8 @@ export default {
         moveToNorth() {
             this.turn++;
             this.diceInscription = "roll dice";
+            this.step1 = 0;
+            this.step2 = 0;
             this.step = 0;
             this.isSouthDice = false;
             this.isWestDice = false;
@@ -310,6 +328,8 @@ export default {
         moveToEast() {
             this.turn++;
             this.diceInscription = "roll dice";
+            this.step1 = 0;
+            this.step2 = 0;
             this.step = 0;
             this.isSouthDice = false;
             this.isWestDice = false;
@@ -328,20 +348,42 @@ export default {
                 player === "east" && this.moveToSouth();
             } else if (chipMove.includes("field-go")) {
                 const chipPos = chipMove.split("from-")[1];
-                const isTwoDice = Number(clickOnFieldNumber) - Number(chipPos) !== Number(this.dice1) && Number(clickOnFieldNumber) - Number(chipPos) !== Number(this.dice2) && Number(clickOnFieldNumber) - Number(chipPos) !== Number(this.step);
-                if (isTwoDice) return;
-                this[player].pos[chip] = clickOnFieldNumber; // меняю позицию игрока
-                this[player].move[chip] = "field"; // даем статус фишке "поле"
-                if (this.step === Number(this.dice1) || this.step === Number(this.dice2)) {
+                const difference = Number(clickOnFieldNumber) - Number(chipPos)
+                //================
+                if (difference === this.step1 || difference - this.step1 === -56) {
+                    this[player].pos[chip] = clickOnFieldNumber;
+                    this.step = this.step - this.step1;
+                    this.step1 = 0;
+                } else if (difference === this.step2 || difference - this.step2 === -56) {
+                    this[player].pos[chip] = clickOnFieldNumber;
+                    this.step = this.step - this.step2;
+                    this.step2 = 0;
+                } else if (difference === this.step || difference - this.step === -56) {
+                    this[player].pos[chip] = clickOnFieldNumber;
+                    this.step1 = 0;
+                    this.step2 = 0;
                     this.step = 0;
-                } else if (Number(clickOnFieldNumber) - Number(chipPos) === Number(this.dice1)) {
-                    this.step = this.step - Number(this.dice1);
-                } else if (Number(clickOnFieldNumber) - Number(chipPos) === Number(this.dice2)) {
-                    this.step = this.step - Number(this.dice2);
                 } else {
-                    this.step = 0;
+                    return;
                 }
+                this[player].move[chip] = "field";
                 if (this.step) return;
+                //-------------
+                //     const isTwoDice = Number(clickOnFieldNumber) - Number(chipPos) !== Number(this.dice1) && Number(clickOnFieldNumber) - Number(chipPos) !== Number(this.dice2) && Number(clickOnFieldNumber) - Number(chipPos) !== Number(this.step);
+                // if (isTwoDice) return;
+                // this[player].pos[chip] = clickOnFieldNumber; // меняю позицию игрока
+                // this[player].move[chip] = "field"; // даем статус фишке "поле"
+                // if (this.step === Number(this.dice1) || this.step === Number(this.dice2)) {
+                //     this.step = 0;
+                // } else if (Number(clickOnFieldNumber) - Number(chipPos) === Number(this.dice1)) {
+                //     this.step = this.step - Number(this.dice1);
+                // } else if (Number(clickOnFieldNumber) - Number(chipPos) === Number(this.dice2)) {
+                //     this.step = this.step - Number(this.dice2);
+                // } else {
+                //     this.step = 0;
+                // }
+                // if (this.step) return;
+                //================
                 player === "south" && this.moveToWest();
                 player === "west" && this.moveToNorth();
                 player === "north" && this.moveToEast();
@@ -372,23 +414,35 @@ export default {
         },
 
         handlePlayer(e, chipMove, player, chip) { // клик по игроку
-            if (chipMove === "home" && this.dice1 === this.dice2) { // если фишка дома и на кубиках дубль
+            if (chipMove.includes("home") && this.dice1 === this.dice2) { // если фишка дома и на кубиках дубль
                 e.path.map(el => {
                     if (el.nodeName === "SPAN" && el.className.includes(player)) { // если это тег <li></li> в котором есть класс соответсвующий игроку
                         // тогда присвоить флагу "движение игрока" значение "взял из дома" для соответсвующего игрока
-                        this[player].move.n1 = "home"
-                        this[player].move.n2 = "home"
-                        this[player].move.n3 = "home"
-                        this[player].move.n4 = "home"
+                        this[player].move.n1 === "home-go" && (this[player].move.n1 = "home")
+                        this[player].move.n2 === "home-go" && (this[player].move.n2 = "home")
+                        this[player].move.n3 === "home-go" && (this[player].move.n3 = "home")
+                        this[player].move.n4 === "home-go" && (this[player].move.n4 = "home")
+                        this[player].move.n1.includes("field-go-from") && (this[player].move.n1 = "field")
+                        this[player].move.n2.includes("field-go-from") && (this[player].move.n2 = "field")
+                        this[player].move.n3.includes("field-go-from") && (this[player].move.n3 = "field")
+                        this[player].move.n4.includes("field-go-from") && (this[player].move.n4 = "field")
                         this[player].move[chip] = "home-go"
                     }
                 })
-            } else if (chipMove === "home" && this.dice1 !== this.dice2) { // если фишка дома и на кубиках нет дубль
+            } else if (chipMove.includes("home") && this.dice1 !== this.dice2) { // если фишка дома и на кубиках нет дубль
                 return;
             } else { // если фишка не дома
                 e.path.map(el => {
                     if (el.nodeName === "SPAN" && el.className.includes(player)) { // если это тег <li></li> в котором есть класс соответсвующий игроку
                         // тогда присвоить флагу "движение игрока" значение "взял с поля" для соответсвующего игрока
+                        this[player].move.n1 === "home-go" && (this[player].move.n1 = "home")
+                        this[player].move.n2 === "home-go" && (this[player].move.n2 = "home")
+                        this[player].move.n3 === "home-go" && (this[player].move.n3 = "home")
+                        this[player].move.n4 === "home-go" && (this[player].move.n4 = "home")
+                        this[player].move.n1.includes("field-go-from") && (this[player].move.n1 = "field")
+                        this[player].move.n2.includes("field-go-from") && (this[player].move.n2 = "field")
+                        this[player].move.n3.includes("field-go-from") && (this[player].move.n3 = "field")
+                        this[player].move.n4.includes("field-go-from") && (this[player].move.n4 = "field")
                         this[player].move[chip] = "field-go-from-"
                     }
                     if (el.nodeName === "LI") {
