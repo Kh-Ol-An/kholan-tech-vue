@@ -337,18 +337,6 @@ export default {
             this.isEastDice = true;
         },
 
-        // возврат фишки домой
-        chipReturnHome(player, chip) {
-            if (this[player].pos.n1 !== `${player}-1`) {
-                this[player].pos[chip] = player + "-1";
-            } else if (this[player].pos.n2 !== `${player}-2`) {
-                this[player].pos[chip] = player + "-2";
-            } else if (this[player].pos.n3 !== `${player}-3`) {
-                this[player].pos[chip] = player + "-3";
-            } else {
-                this[player].pos[chip] = player + "-4";
-            }
-        },
         playerTurn(chipMove, clickOnFieldNumber, fieldNumber, player, chip) {
             if (chipMove === "home-go") { // если игрок находится дома
                 if (clickOnFieldNumber !== fieldNumber) return; // после взятия фишки разрешаю становиться только в начало
@@ -363,17 +351,14 @@ export default {
                 const chipPos = chipMove.split("from-")[1]; // снимаем позицию с фишки
                 const difference = Number(clickOnFieldNumber) - Number(chipPos); // разница между позицией фишки и нажатым полем
                 if (difference === this.step1 || difference - this.step1 === -56) {
-                    this.chipReturnHome(player, chip); // возвращаем врага домой
                     this[player].pos[chip] = clickOnFieldNumber; // меняю позицию игрока
                     this.step = this.step - this.step1;
                     this.step1 = 0;
                 } else if (difference === this.step2 || difference - this.step2 === -56) {
-                    this.chipReturnHome(player, chip); // возвращаем врага домой
                     this[player].pos[chip] = clickOnFieldNumber; // меняю позицию игрока
                     this.step = this.step - this.step2;
                     this.step2 = 0;
                 } else if (difference === this.step || difference - this.step === -56) {
-                    this.chipReturnHome(player, chip); // возвращаем врага домой
                     this[player].pos[chip] = clickOnFieldNumber; // меняю позицию игрока
                     this.step1 = 0;
                     this.step2 = 0;
@@ -423,22 +408,66 @@ export default {
             this[player].move.n3.includes("field-go-from") && (this[player].move.n3 = "field");
             this[player].move.n4.includes("field-go-from") && (this[player].move.n4 = "field");
         },
-        // // замена фишки
-        // chipReplacement(player, clickOnChipPos) {
-        //     if (this[player].move.n1.includes("-go")) {
-        //         this[player].move.n1 = "field";
-        //         this[player].pos.n1 = clickOnChipPos
-        //     } else if (this[player].move.n2.includes("-go")) {
-        //         this[player].move.n2 = "field";
-        //         this[player].pos.n2 = clickOnChipPos
-        //     } else if (this[player].move.n3.includes("-go")) {
-        //         this[player].move.n3 = "field";
-        //         this[player].pos.n3 = clickOnChipPos
-        //     } else if (this[player].move.n4.includes("-go")) {
-        //         this[player].move.n4 = "field";
-        //         this[player].pos.n4 = clickOnChipPos
-        //     }
-        // },
+        // возврат фишки домой
+        chipReturnHome(player, chip) {
+            if (this[player].pos.n1 !== `${player}-1`) {
+                this[player].pos[chip] = player + "-1";
+            } else if (this[player].pos.n2 !== `${player}-2`) {
+                this[player].pos[chip] = player + "-2";
+            } else if (this[player].pos.n3 !== `${player}-3`) {
+                this[player].pos[chip] = player + "-3";
+            } else {
+                this[player].pos[chip] = player + "-4";
+            }
+        },
+        // замена фишки
+        chipReplacement(player, clickOnChipPos, fieldNumber, returnPlayer, returnChip) {
+            if (this[player].move.n1.includes("home-go")) {
+                if (clickOnChipPos !== fieldNumber) return; // после взятия фишки разрешаю становиться только в начало
+                this[player].pos.n1 = fieldNumber
+                this[player].move.n1 = "field";
+                this.chipReturnHome(returnPlayer, returnChip)
+                player === "south" && this.moveToWest();
+                player === "west" && this.moveToNorth();
+                player === "north" && this.moveToEast();
+                player === "east" && this.moveToSouth();
+            } else if (this[player].move.n2.includes("home-go")) {
+                if (clickOnChipPos !== fieldNumber) return; // после взятия фишки разрешаю становиться только в начало
+                this[player].pos.n2 = fieldNumber
+                this[player].move.n2 = "field";
+                this.chipReturnHome(returnPlayer, returnChip)
+                player === "south" && this.moveToWest();
+                player === "west" && this.moveToNorth();
+                player === "north" && this.moveToEast();
+                player === "east" && this.moveToSouth();
+            } else if (this[player].move.n3.includes("home-go")) {
+                if (clickOnChipPos !== fieldNumber) return; // после взятия фишки разрешаю становиться только в начало
+                this[player].pos.n3 = fieldNumber
+                this[player].move.n3 = "field";
+                this.chipReturnHome(returnPlayer, returnChip)
+                player === "south" && this.moveToWest();
+                player === "west" && this.moveToNorth();
+                player === "north" && this.moveToEast();
+                player === "east" && this.moveToSouth();
+            } else if (this[player].move.n4.includes("home-go")) {
+                if (clickOnChipPos !== fieldNumber) return; // после взятия фишки разрешаю становиться только в начало
+                this[player].pos.n4 = fieldNumber
+                this[player].move.n4 = "field";
+                this.chipReturnHome(returnPlayer, returnChip)
+                player === "south" && this.moveToWest();
+                player === "west" && this.moveToNorth();
+                player === "north" && this.moveToEast();
+                player === "east" && this.moveToSouth();
+            }
+            // else if (this[player].move.n4.includes("field-go")) {
+            //     this[player].pos.n4 = fieldNumber
+            //     this[player].move.n4 = "field";
+            //     player === "south" && this.moveToWest();
+            //     player === "west" && this.moveToNorth();
+            //     player === "north" && this.moveToEast();
+            //     player === "east" && this.moveToSouth();
+            // }
+        },
         handlePlayer(e, dice, chipMove, player, chip) { // клик по игроку
             // первый клик
             if (dice) { // если кликнуть по фишке чей сейчас ход
@@ -464,7 +493,6 @@ export default {
                     })
                 }
             } else {
-                if (chipMove.includes("home")) return;
                 // второй клик или клик по врагу
                 let clickOnChipPos = '';
                 e.path.map(el => {
@@ -473,44 +501,14 @@ export default {
                     }
                 })
                 if (this.isSouthDice) { // в зависимости от того чей ход
-                    this.playerTurn(this.south.move.n1, clickOnChipPos, "0", "south", "n1");
-                    this.playerTurn(this.south.move.n2, clickOnChipPos, "0", "south", "n2");
-                    this.playerTurn(this.south.move.n3, clickOnChipPos, "0", "south", "n3");
-                    this.playerTurn(this.south.move.n4, clickOnChipPos, "0", "south", "n4");
+                    this.chipReplacement("south", clickOnChipPos, "0", player, chip);
                 } else if (this.isWestDice) {
-                    this.playerTurn(this.west.move.n1, clickOnChipPos, "14", "west", "n1");
-                    this.playerTurn(this.west.move.n2, clickOnChipPos, "14", "west", "n2");
-                    this.playerTurn(this.west.move.n3, clickOnChipPos, "14", "west", "n3");
-                    this.playerTurn(this.west.move.n4, clickOnChipPos, "14", "west", "n4");
+                    this.chipReplacement("west", clickOnChipPos, "14", player, chip);
                 } else if (this.isNorthDice) {
-                    this.playerTurn(this.north.move.n1, clickOnChipPos, "28", "north", "n1");
-                    this.playerTurn(this.north.move.n2, clickOnChipPos, "28", "north", "n2");
-                    this.playerTurn(this.north.move.n3, clickOnChipPos, "28", "north", "n3");
-                    this.playerTurn(this.north.move.n4, clickOnChipPos, "28", "north", "n4");
+                    this.chipReplacement("north", clickOnChipPos, "28", player, chip);
                 } else if (this.isEastDice) {
-                    this.playerTurn(this.east.move.n1, clickOnChipPos, "42", "east", "n1");
-                    this.playerTurn(this.east.move.n2, clickOnChipPos, "42", "east", "n2");
-                    this.playerTurn(this.east.move.n3, clickOnChipPos, "42", "east", "n3");
-                    this.playerTurn(this.east.move.n4, clickOnChipPos, "42", "east", "n4");
+                    this.chipReplacement("east", clickOnChipPos, "42", player, chip);
                 }
-                // if (this.isSouthDice) {
-                //     this.chipReturnHome(player, chip)
-                //
-                //     if (this.south.move.n1 === "home-go") {
-                //         this.south.move.n1 = "field";
-                //         this.south.pos.n1 = startPos
-                //     } else if (this.south.move.n2 === "home-go") {
-                //         this.south.move.n2 = "field";
-                //         this.south.pos.n2 = startPos
-                //     } else if (this.south.move.n3 === "home-go") {
-                //         this.south.move.n3 = "field";
-                //         this.south.pos.n3 = startPos
-                //     } else if (this.south.move.n4 === "home-go") {
-                //         this.south.move.n4 = "field";
-                //         this.south.pos.n4 = startPos
-                //     }
-                //     this.moveToWest();
-                // }
             }
         },
 
