@@ -336,6 +336,12 @@ export default {
             this.isNorthDice = false;
             this.isEastDice = true;
         },
+        moveTransition(player) {
+            player === "south" && this.moveToWest();
+            player === "west" && this.moveToNorth();
+            player === "north" && this.moveToEast();
+            player === "east" && this.moveToSouth();
+        },
 
         playerTurn(chipMove, clickOnFieldNumber, fieldNumber, player, chip) {
             if (chipMove === "home-go") { // если игрок находится дома
@@ -343,10 +349,7 @@ export default {
                 this[player].pos[chip] = clickOnFieldNumber; // меняю позицию игрока
                 this[player].move[chip] = "field"; // даем статус фишке "поле"
                 // передаем ход дальше
-                player === "south" && this.moveToWest();
-                player === "west" && this.moveToNorth();
-                player === "north" && this.moveToEast();
-                player === "east" && this.moveToSouth();
+                this.moveTransition(player)
             } else if (chipMove.includes("field-go")) {
                 const chipPos = chipMove.split("from-")[1]; // снимаем позицию с фишки
                 const difference = Number(clickOnFieldNumber) - Number(chipPos); // разница между позицией фишки и нажатым полем
@@ -368,10 +371,7 @@ export default {
                 }
                 this[player].move[chip] = "field"; // даем статус фишке "поле"
                 if (this.step) return;
-                player === "south" && this.moveToWest();
-                player === "west" && this.moveToNorth();
-                player === "north" && this.moveToEast();
-                player === "east" && this.moveToSouth();
+                this.moveTransition(player)
             }
         },
         handleFieldClick(e) { // клик по полю
@@ -427,37 +427,25 @@ export default {
                 this[player].pos.n1 = fieldNumber
                 this[player].move.n1 = "field";
                 this.chipReturnHome(returnPlayer, returnChip)
-                player === "south" && this.moveToWest();
-                player === "west" && this.moveToNorth();
-                player === "north" && this.moveToEast();
-                player === "east" && this.moveToSouth();
+                this.moveTransition(player)
             } else if (this[player].move.n2.includes("home-go")) {
                 if (clickOnChipPos !== fieldNumber) return; // после взятия фишки разрешаю становиться только в начало
                 this[player].pos.n2 = fieldNumber
                 this[player].move.n2 = "field";
                 this.chipReturnHome(returnPlayer, returnChip)
-                player === "south" && this.moveToWest();
-                player === "west" && this.moveToNorth();
-                player === "north" && this.moveToEast();
-                player === "east" && this.moveToSouth();
+                this.moveTransition(player)
             } else if (this[player].move.n3.includes("home-go")) {
                 if (clickOnChipPos !== fieldNumber) return; // после взятия фишки разрешаю становиться только в начало
                 this[player].pos.n3 = fieldNumber
                 this[player].move.n3 = "field";
                 this.chipReturnHome(returnPlayer, returnChip)
-                player === "south" && this.moveToWest();
-                player === "west" && this.moveToNorth();
-                player === "north" && this.moveToEast();
-                player === "east" && this.moveToSouth();
+                this.moveTransition(player)
             } else if (this[player].move.n4.includes("home-go")) {
                 if (clickOnChipPos !== fieldNumber) return; // после взятия фишки разрешаю становиться только в начало
                 this[player].pos.n4 = fieldNumber
                 this[player].move.n4 = "field";
                 this.chipReturnHome(returnPlayer, returnChip)
-                player === "south" && this.moveToWest();
-                player === "west" && this.moveToNorth();
-                player === "north" && this.moveToEast();
-                player === "east" && this.moveToSouth();
+                this.moveTransition(player)
             }
             // else if (this[player].move.n4.includes("field-go")) {
             //     this[player].pos.n4 = fieldNumber
