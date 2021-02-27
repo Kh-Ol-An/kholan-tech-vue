@@ -409,52 +409,148 @@ export default {
             this[player].move.n4.includes("field-go-from") && (this[player].move.n4 = "field");
         },
         // возврат фишки домой
-        chipReturnHome(player, chip) {
-            if (this[player].pos.n1 !== `${player}-1`) {
-                this[player].pos[chip] = player + "-1";
-            } else if (this[player].pos.n2 !== `${player}-2`) {
-                this[player].pos[chip] = player + "-2";
-            } else if (this[player].pos.n3 !== `${player}-3`) {
-                this[player].pos[chip] = player + "-3";
-            } else {
-                this[player].pos[chip] = player + "-4";
+        chipReturnHome(returnPlayer, returnChip) {
+            if (returnChip === "n1" && this[returnPlayer].pos.n1 !== `${returnPlayer}-1`) {
+                this[returnPlayer].pos[returnChip] = returnPlayer + "-1";
+                this[returnPlayer].move[returnChip] = "home";
+            } else if (returnChip === "n2" && this[returnPlayer].pos.n2 !== `${returnPlayer}-2`) {
+                this[returnPlayer].pos[returnChip] = returnPlayer + "-2";
+                this[returnPlayer].move[returnChip] = "home";
+            } else if (returnChip === "n3" && this[returnPlayer].pos.n3 !== `${returnPlayer}-3`) {
+                this[returnPlayer].pos[returnChip] = returnPlayer + "-3";
+                this[returnPlayer].move[returnChip] = "home";
+            } else if (returnChip === "n4" && this[returnPlayer].pos.n4 !== `${returnPlayer}-4`) {
+                this[returnPlayer].pos[returnChip] = returnPlayer + "-4";
+                this[returnPlayer].move[returnChip] = "home";
             }
         },
         // замена фишки
-        chipReplacement(player, clickOnChipPos, fieldNumber, returnPlayer, returnChip) {
+        chipReplacement(player, clickOnOpponentPos, fieldNumber, returnPlayer, returnChip) {
             if (this[player].move.n1.includes("home-go")) {
-                if (clickOnChipPos !== fieldNumber) return; // после взятия фишки разрешаю становиться только в начало
-                this[player].pos.n1 = fieldNumber
+                if (clickOnOpponentPos !== fieldNumber) return; // после взятия фишки разрешаю становиться только в начало
+                this[player].pos.n1 = fieldNumber // меняю позицию игрока
                 this[player].move.n1 = "field";
                 this.chipReturnHome(returnPlayer, returnChip)
                 this.moveTransition(player)
             } else if (this[player].move.n2.includes("home-go")) {
-                if (clickOnChipPos !== fieldNumber) return; // после взятия фишки разрешаю становиться только в начало
-                this[player].pos.n2 = fieldNumber
+                if (clickOnOpponentPos !== fieldNumber) return; // после взятия фишки разрешаю становиться только в начало
+                this[player].pos.n2 = fieldNumber // меняю позицию игрока
                 this[player].move.n2 = "field";
                 this.chipReturnHome(returnPlayer, returnChip)
                 this.moveTransition(player)
             } else if (this[player].move.n3.includes("home-go")) {
-                if (clickOnChipPos !== fieldNumber) return; // после взятия фишки разрешаю становиться только в начало
-                this[player].pos.n3 = fieldNumber
+                if (clickOnOpponentPos !== fieldNumber) return; // после взятия фишки разрешаю становиться только в начало
+                this[player].pos.n3 = fieldNumber // меняю позицию игрока
                 this[player].move.n3 = "field";
                 this.chipReturnHome(returnPlayer, returnChip)
                 this.moveTransition(player)
             } else if (this[player].move.n4.includes("home-go")) {
-                if (clickOnChipPos !== fieldNumber) return; // после взятия фишки разрешаю становиться только в начало
-                this[player].pos.n4 = fieldNumber
+                if (clickOnOpponentPos !== fieldNumber) return; // после взятия фишки разрешаю становиться только в начало
+                this[player].pos.n4 = fieldNumber // меняю позицию игрока
                 this[player].move.n4 = "field";
                 this.chipReturnHome(returnPlayer, returnChip)
                 this.moveTransition(player)
+            } else if (this[player].move.n1.includes("field-go")) {
+                const chipPos = this[player].pos.n1; // снимаем позицию с фишки
+                const difference = Number(clickOnOpponentPos) - Number(chipPos); // разница между позицией фишки и позицией оппонента
+                if (difference === this.step1) {
+                    this[player].pos.n1 = clickOnOpponentPos; // меняю позицию игрока
+                    this.step = this.step - this.step1;
+                    this.step1 = 0;
+                    this.chipReturnHome(returnPlayer, returnChip)
+                } else if (difference === this.step2) {
+                    this[player].pos.n1 = clickOnOpponentPos; // меняю позицию игрока
+                    this.step = this.step - this.step2;
+                    this.step2 = 0;
+                    this.chipReturnHome(returnPlayer, returnChip)
+                } else if (difference === this.step) {
+                    this[player].pos.n1 = clickOnOpponentPos; // меняю позицию игрока
+                    this.step1 = 0;
+                    this.step2 = 0;
+                    this.step = 0;
+                    this.chipReturnHome(returnPlayer, returnChip)
+                } else {
+                    return;
+                }
+                this[player].move.n1 = "field"; // даем статус фишке "поле"
+                if (this.step) return;
+                this.moveTransition(player)
+            } else if (this[player].move.n2.includes("field-go")) {
+                const chipPos = this[player].pos.n2; // снимаем позицию с фишки
+                const difference = Number(clickOnOpponentPos) - Number(chipPos); // разница между позицией фишки и позицией оппонента
+                if (difference === this.step1) {
+                    this[player].pos.n2 = clickOnOpponentPos; // меняю позицию игрока
+                    this.step = this.step - this.step1;
+                    this.step1 = 0;
+                    this.chipReturnHome(returnPlayer, returnChip)
+                } else if (difference === this.step2) {
+                    this[player].pos.n2 = clickOnOpponentPos; // меняю позицию игрока
+                    this.step = this.step - this.step2;
+                    this.step2 = 0;
+                    this.chipReturnHome(returnPlayer, returnChip)
+                } else if (difference === this.step) {
+                    this[player].pos.n2 = clickOnOpponentPos; // меняю позицию игрока
+                    this.step1 = 0;
+                    this.step2 = 0;
+                    this.step = 0;
+                    this.chipReturnHome(returnPlayer, returnChip)
+                } else {
+                    return;
+                }
+                this[player].move.n2 = "field"; // даем статус фишке "поле"
+                if (this.step) return;
+                this.moveTransition(player)
+            } else if (this[player].move.n3.includes("field-go")) {
+                const chipPos = this[player].pos.n3; // снимаем позицию с фишки
+                const difference = Number(clickOnOpponentPos) - Number(chipPos); // разница между позицией фишки и позицией оппонента
+                if (difference === this.step1) {
+                    this[player].pos.n3 = clickOnOpponentPos; // меняю позицию игрока
+                    this.step = this.step - this.step1;
+                    this.step1 = 0;
+                    this.chipReturnHome(returnPlayer, returnChip)
+                } else if (difference === this.step2) {
+                    this[player].pos.n3 = clickOnOpponentPos; // меняю позицию игрока
+                    this.step = this.step - this.step2;
+                    this.step2 = 0;
+                    this.chipReturnHome(returnPlayer, returnChip)
+                } else if (difference === this.step) {
+                    this[player].pos.n3 = clickOnOpponentPos; // меняю позицию игрока
+                    this.step1 = 0;
+                    this.step2 = 0;
+                    this.step = 0;
+                    this.chipReturnHome(returnPlayer, returnChip)
+                } else {
+                    return;
+                }
+                this[player].move.n3 = "field"; // даем статус фишке "поле"
+                if (this.step) return;
+                this.moveTransition(player)
+            } else if (this[player].move.n4.includes("field-go")) {
+                const chipPos = this[player].pos.n4; // снимаем позицию с фишки
+                const difference = Number(clickOnOpponentPos) - Number(chipPos); // разница между позицией фишки и позицией оппонента
+                if (difference === this.step1) {
+                    this[player].pos.n4 = clickOnOpponentPos; // меняю позицию игрока
+                    this.step = this.step - this.step1;
+                    this.step1 = 0;
+                    this.chipReturnHome(returnPlayer, returnChip)
+                } else if (difference === this.step2) {
+                    this[player].pos.n4 = clickOnOpponentPos; // меняю позицию игрока
+                    this.step = this.step - this.step2;
+                    this.step2 = 0;
+                    this.chipReturnHome(returnPlayer, returnChip)
+                } else if (difference === this.step) {
+                    this[player].pos.n4 = clickOnOpponentPos; // меняю позицию игрока
+                    this.step1 = 0;
+                    this.step2 = 0;
+                    this.step = 0;
+                    this.chipReturnHome(returnPlayer, returnChip)
+                } else {
+                    return;
+                }
+                this[player].move.n4 = "field"; // даем статус фишке "поле"
+                if (this.step) return;
+                this.moveTransition(player)
             }
-            // else if (this[player].move.n4.includes("field-go")) {
-            //     this[player].pos.n4 = fieldNumber
-            //     this[player].move.n4 = "field";
-            //     player === "south" && this.moveToWest();
-            //     player === "west" && this.moveToNorth();
-            //     player === "north" && this.moveToEast();
-            //     player === "east" && this.moveToSouth();
-            // }
         },
         handlePlayer(e, dice, chipMove, player, chip) { // клик по игроку
             // первый клик
