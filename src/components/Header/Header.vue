@@ -4,7 +4,7 @@
 
         <div class="header__nav">
             <button class="header__nav-burger" type="button"
-                    @click="handleSwitchBurger">
+                    @click="handleSwitchNav">
                 <span class="header__nav-burger-line1" :class="{active: isHeaderBurger}"/>
                 <span class="header__nav-burger-line2" :class="{active: isHeaderBurger}"/>
                 <span class="header__nav-burger-line3" :class="{active: isHeaderBurger}"/>
@@ -31,7 +31,7 @@
                     </router-link>
                 </li>
                 <li class="header__nav-list-video" :class="{active: isHeaderVideo}">
-                    <video muted ref="rafVideo" @pause="updatePaused">
+                    <video muted ref="rafVideo">
                         <source src="@/assets/video/dust.mp4" type='video/mp4'>
                     </video>
                     <div class="header__nav-list-video-shadow"></div>
@@ -65,7 +65,7 @@ export default {
         }),
     },
     methods: {
-        handleSwitchBurger() {
+        handleSwitchNav() {
             this.isHeaderBurger = !this.isHeaderBurger
             this.isHeaderVideo = this.isHeaderBurger
             // убирает анимацию во время первой загрузки страницы
@@ -78,6 +78,13 @@ export default {
                 this.$refs.rafVideo.currentTime = 0;
             }
         },
+        // handleCloseNav() {
+        //     console.log("handleCloseNav")
+        //     this.isHeaderBurger = false
+        //     this.isHeaderVideo = false
+        //     this.$refs.rafVideo.pause();
+        //     this.$refs.rafVideo.currentTime = 0;
+        // }
         // updatePaused(e) {
         //     this.isPaused = e.target.paused
         // }
@@ -384,7 +391,7 @@ export default {
 
             &-video {
                 position: fixed;
-                top: 98px;
+                top: 102px;
                 left: 0;
                 z-index: 1;
                 width: 100%;
@@ -401,7 +408,7 @@ export default {
                     left: 0;
                     width: 100%;
                     height: 100%;
-                    box-shadow: 0px 0px 10px 9px rgba(0, 0, 0, 0.9) inset;
+                    box-shadow: 0px 22px 10px -10px rgba(0, 0, 0, 0.9) inset, 0px -22px 10px -10px rgba(0, 0, 0, 0.9) inset;
                 }
             }
         }

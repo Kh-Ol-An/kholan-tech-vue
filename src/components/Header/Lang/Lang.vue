@@ -61,6 +61,7 @@ export default {
     position: relative;
     width: 22px;
     height: 16px;
+    z-index: 11;
 
     @media (max-width: 800px) {
         order: 1;
