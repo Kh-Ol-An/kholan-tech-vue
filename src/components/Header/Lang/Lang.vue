@@ -1,21 +1,20 @@
 <template>
-    <div class="lang-wrap">
+    <div class="lang" @mouseover="isMount = true">
         <label
             v-for="data in content"
             :key="data.lang"
-            class="label"
-            :class="{ enable: localLang === data.lang, disable: localLang !== data.lang }"
+            class="lang__label"
+            :class="{ enable: localLang === data.lang, disable: localLang !== data.lang, mount: isMount }"
             title="language"
         >
             <input
-                class="input"
+                class="lang__label-input"
                 type="radio"
                 :value="data.lang"
                 v-model="localLang"
                 @change="handleChange"
             />
-            <span class="span">{{ data.language }}</span>
-            <span class="flag" :class="data.lang"/>
+            <span class="lang__label-flag" :class="data.lang"/>
         </label>
     </div>
 </template>
@@ -31,7 +30,11 @@ export default {
             content,
             localLang: "",
             enable: false,
-            disable: false
+            disable: false,
+            isVideoForward: true,
+            isVideoReverse: false,
+            // убирает анимацию во время первой загрузки страницы
+            isMount: false,
         };
     },
     mounted() {
@@ -46,97 +49,179 @@ export default {
         handleChange() {
             this.updateContentLang(this.localLang);
             localStorage.setItem("lang", this.localLang);
-        }
-    }
+        },
+    },
 };
 </script>
 
 <style scoped lang="scss">
 @import "~@/styles/variables.scss";
 
-.lang-wrap {
-    position: fixed;
-    top: 1.2em;
-    right: 1.6em;
-    z-index: 2;
+.lang {
+    position: relative;
+    width: 22px;
+    height: 16px;
 
-    .label {
+    @media (max-width: 800px) {
+        order: 1;
+    }
+
+    &__label {
         font-size: 1.6rem; /* 16px */
         position: absolute;
         top: 0;
         right: 0;
         color: $primary-color;
         font-family: $primary-family;
-        padding: 0.625em 0;
+        padding: 0 0 0.625em;
         cursor: pointer;
 
-        .input {
+        &.enable {
+            z-index: 3;
+        }
+
+        &.disable {
+            z-index: 2;
+        }
+
+        &.disable ~ .disable {
+            z-index: 1;
+        }
+
+        &-input {
             display: none;
         }
 
-        .flag {
+        &-flag {
             width: 1.375em;
             height: 1em;
-            position: absolute;
-            top: 0.6875em;
-            left: -1.625em;
-            display: inline-block;
-            background-size: contain;
-            background-position: right;
+            display: block;
+            background-size: cover;
+            background-position: center;
             background-repeat: no-repeat;
+
+            &.en {
+                background-image: url("~@/assets/images/flag/uk.png");
+            }
+
+            &.ua {
+                background-image: url("~@/assets/images/flag/ua.png");
+            }
+
+            &.ru {
+                background-image: url("~@/assets/images/flag/ru.png");
+            }
         }
+    }
 
-        .en {
-            background-image: url("~@/assets/images/flag/uk.png");
+    .disable.mount {
+        animation: langLeave1 200ms linear forwards;
+
+        @keyframes langLeave1 {
+            0% {
+                top: 1.5625em;
+            }
+            100% {
+                top: 0;
+            }
         }
+    }
 
-        .ua {
-            background-image: url("~@/assets/images/flag/ua.png");
+    .disable.mount ~ .disable.mount {
+        animation: langLeave2 200ms linear forwards;
+
+        @keyframes langLeave2 {
+            0% {
+                top: 3.125em;
+            }
+            100% {
+                top: 0;
+            }
         }
+    }
 
-        .ru {
-            background-image: url("~@/assets/images/flag/ru.png");
+    &:hover .lang__label.disable {
+        animation: langHover1 400ms linear forwards;
+
+        @keyframes langHover1 {
+            0% {
+                top: 0;
+            }
+            40% {
+                top: 1.6em;
+            }
+            64% {
+                top: 1.35em;
+            }
+            100% {
+                top: 1.5625em;
+            }
         }
     }
 
-    .enable {
-        z-index: 1;
+    &:hover .lang__label.disable ~ .lang__label.disable {
+        animation: langHover2 400ms linear forwards;
+
+        @keyframes langHover2 {
+            0% {
+                opacity: 0;
+                top: 0;
+            }
+            39% {
+                opacity: 0;
+            }
+            40% {
+                opacity: 1;
+                top: 1.6em;
+            }
+            80% {
+                opacity: 1;
+                top: 3.125em;
+            }
+            100% {
+                opacity: 1;
+                top: 3.125em;
+            }
+        }
     }
 
-    .disable {
-        opacity: 0;
-        transition: all 300ms ease-in;
+    &:hover .en {
+        background-image: url("~@/assets/images/flag/uk.gif");
     }
 
-    .disable {
-        top: 1.5625em;
-        transform: translateY(-1.5625em);
+    &:hover .ua {
+        background-image: url("~@/assets/images/flag/ua.gif");
     }
 
-    .disable ~ .disable {
-        top: 3.125em;
-        transform: translateY(-3.125em);
+    &:hover .ru {
+        background-image: url("~@/assets/images/flag/ru.gif");
     }
-}
 
-.lang-wrap:hover .disable {
-    opacity: 1;
-    transform: translateY(0);
+    //&__video-forward,
+    //&__video-reverse {
+    //    position: absolute;
+    //    left: -37px;
+    //    top: 12px;
+    //    transform: rotate(90deg);
+    //    display: none;
+    //    min-width: 95px;
+    //    min-height: 47px;
+    //
+    //    &::before {
+    //        content: '';
+    //        position: absolute;
+    //        top: 0;
+    //        left: 0;
+    //        width: 100%;
+    //        height: 98%;
+    //        pointer-events: none;
+    //        background: linear-gradient(to right, red, red, yellow, green, blue, orange);
+    //        mix-blend-mode: color;
+    //    }
+    //
+    //    &.active {
+    //        display: block;
+    //    }
+    //}
 }
-
-.lang-wrap:hover .en {
-    background-image: url("~@/assets/images/flag/uk.gif");
-}
-
-.lang-wrap:hover .ua {
-    background-image: url("~@/assets/images/flag/ua.gif");
-}
-
-.lang-wrap:hover .ru {
-    background-image: url("~@/assets/images/flag/ru.gif");
-}
-
-// .enable:hover {
-//   color: red;
-// }
 </style>

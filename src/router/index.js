@@ -9,11 +9,11 @@ const routes = [
     name: "MainPage",
     component: () => import("@/views/MainPage.vue")
   },
-  {
-    path: "/games",
-    name: "GamesPage",
-    component: () => import("@/views/GamesPage.vue")
-  },
+  // {
+  //   path: "/game",
+  //   name: "GamePage",
+  //   component: () => import("@/views/GamePage.vue")
+  // },
   {
     path: "/cv",
     name: "CVPage",

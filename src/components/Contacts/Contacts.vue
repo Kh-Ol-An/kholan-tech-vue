@@ -1,5 +1,8 @@
 <template>
     <div class="main">
+        <video autoplay loop muted="muted">
+            <source src="@/assets/video/contacts.mp4" type='video/mp4'>
+        </video>
         <a class="phone" :title="titlePhone" href="tel:+380508899268">
             <img src="@/assets/images/icons/phone.png" alt="phone-icon" width="50"/>
             {{ titlePhone }}
@@ -35,12 +38,14 @@
             E-mail
         </a>
 
-        <a class="github" title="GitHub" href="https://github.com/Kh-Ol-An/visit-card" target="_blank" rel="noopener noreferrer">
+        <a class="github" title="GitHub" href="https://github.com/Kh-Ol-An/visit-card" target="_blank"
+           rel="noopener noreferrer">
             <img src="@/assets/images/icons/github.png" alt="github-icons" width="50"/>
             GitHub
         </a>
 
-        <a class="linkedin" title="Linkedin" href="https://linkedin.com/in/kh-ol-an/" target="_blank" rel="noopener noreferrer">
+        <a class="linkedin" title="Linkedin" href="https://linkedin.com/in/kh-ol-an/" target="_blank"
+           rel="noopener noreferrer">
             <img src="@/assets/images/icons/linkedin.png" alt="linkedin-icons" width="50"/>
             Linkedin
         </a>
@@ -53,9 +58,11 @@ import {mapGetters} from "vuex";
 export default {
     name: "Contacts",
     computed: {
-        ...mapGetters(["getContentLang"]),
+        ...mapGetters({
+            contentLang: "getContentLang"
+        }),
         titlePhone() {
-            return this.getContentLang.lang === "en" ? "Phone" : "Телефон"
+            return this.contentLang.lang === "en" ? "Phone" : "Телефон"
         },
         isMobile() {
             return /Mobile|webOS|BlackBerry|IEMobile|MeeGo|mini|Fennec|Windows Phone|Android|iP(ad|od|hone)/i.test(navigator.userAgent,);
@@ -72,10 +79,11 @@ export default {
     right: 0;
     bottom: 0;
     left: 0;
-    background-image: url('~@/assets/images/bg/contacts-bg-img.jpg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-color: #000100;
+    //background-image: url('~@/assets/images/bg/contacts-bg-img.jpg');
+    //background-position: center;
+    //background-repeat: no-repeat;
+    //background-size: cover;
 }
 
 .main img {

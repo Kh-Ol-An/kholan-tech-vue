@@ -1,206 +1,408 @@
 <template>
-    <header class="main">
-        <Lang />
+    <header class="header">
+        <router-link class="header__logo" to="/" title="logo">{{ contentLang.logo }}</router-link>
 
-        <router-link class="logo" to="/" title="logo">{{ getContentLang.logo }}</router-link>
-
-        <label class="nav-container">
-            <input type="checkbox" />
-            <div class="line-wrap">
-                <span class="line1" />
-                <span class="line2" />
-                <span class="line3" />
-            </div>
-            <ul class="nav">
-                <li class="nav__item">
-                    <router-link class="link" to="/">{{ (getContentLang && getContentLang.nav) ? getContentLang.nav.main : '' }}</router-link>
+        <div class="header__nav">
+            <button class="header__nav-burger" type="button"
+                    @click="handleSwitchBurger">
+                <span class="header__nav-burger-line1" :class="{active: isHeaderBurger}"/>
+                <span class="header__nav-burger-line2" :class="{active: isHeaderBurger}"/>
+                <span class="header__nav-burger-line3" :class="{active: isHeaderBurger}"/>
+            </button>
+            <ul class="header__nav-list" :class="{active: isHeaderBurger}">
+                <li class="header__nav-list-item" :class="{active: isHeaderBurger, mount: isLoudPage}">
+                    <router-link class="header__nav-list-item-link" to="/">
+                        {{ (contentLang && contentLang.nav) ? contentLang.nav.main : '' }}
+                    </router-link>
                 </li>
-                <li class="nav__item">
-                    <router-link class="link" to="/games">{{ (getContentLang && getContentLang.nav) ? getContentLang.nav.games : '' }}</router-link>
+                <!--                <li class="header__nav-list-item" :class="{active: isHeaderBurger, mount: isLoudPage}">-->
+                <!--                    <router-link class="header__nav-list-item-link" to="/game">-->
+                <!--                        {{ (contentLang && contentLang.nav) ? contentLang.nav.wens : '' }}-->
+                <!--                    </router-link>-->
+                <!--                </li>-->
+                <li class="header__nav-list-item" :class="{active: isHeaderBurger, mount: isLoudPage}">
+                    <router-link class="header__nav-list-item-link" to="/cv">
+                        {{ (contentLang && contentLang.nav) ? contentLang.nav.cv : '' }}
+                    </router-link>
                 </li>
-                <li class="nav__item">
-                    <router-link class="link" to="/cv">{{ (getContentLang && getContentLang.nav) ? getContentLang.nav.cv : '' }}</router-link>
+                <li class="header__nav-list-item" :class="{active: isHeaderBurger, mount: isLoudPage}">
+                    <router-link class="header__nav-list-item-link" to="/contacts">
+                        {{ (contentLang && contentLang.nav) ? contentLang.nav.contacts : '' }}
+                    </router-link>
                 </li>
-                <li class="nav__item">
-                    <router-link class="link" to="/contacts">{{ (getContentLang && getContentLang.nav) ? getContentLang.nav.contacts : '' }}</router-link>
+                <li class="header__nav-list-video" :class="{active: isHeaderVideo}">
+                    <video muted ref="rafVideo" @pause="updatePaused">
+                        <source src="@/assets/video/dust.mp4" type='video/mp4'>
+                    </video>
+                    <div class="header__nav-list-video-shadow"></div>
                 </li>
             </ul>
-        </label>
+        </div>
+
+        <Lang/>
     </header>
 </template>
 
 <script>
 import Lang from "@/components/Header/Lang/Lang";
-import { mapGetters } from "vuex";
+import {mapGetters} from "vuex";
 
 export default {
     name: "Header",
-    components: { Lang },
+    components: {Lang},
+    data() {
+        return {
+            isHeaderBurger: false,
+            isHeaderVideo: false,
+            // убирает анимацию во время первой загрузки страницы
+            isLoudPage: false,
+            isPaused: null,
+        }
+    },
     computed: {
-        ...mapGetters(["getContentLang"])
-    }
+        ...mapGetters({
+            contentLang: "getContentLang"
+        }),
+    },
+    methods: {
+        handleSwitchBurger() {
+            this.isHeaderBurger = !this.isHeaderBurger
+            this.isHeaderVideo = this.isHeaderBurger
+            // убирает анимацию во время первой загрузки страницы
+            this.isLoudPage = true
+            if (this.isHeaderBurger) {
+                setTimeout(() => this.$refs.rafVideo.play(), 580)
+                // setTimeout(() => this.isHeaderVideo = false, 15000)
+            } else {
+                this.$refs.rafVideo.pause();
+                this.$refs.rafVideo.currentTime = 0;
+            }
+        },
+        // updatePaused(e) {
+        //     this.isPaused = e.target.paused
+        // }
+    },
+    // watch: {
+    //     // isPaused() {
+    //     //     if (this.$refs.rafVideo.pause()) {
+    //     //         return false
+    //     //     }
+    //     // }
+    // }
 };
 </script>
 
 <style scoped lang="scss">
 @import "~@/styles/variables.scss";
 
-.main {
-    box-sizing: border-box;
-    width: 100vw;
+.header {
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 10;
     display: flex;
-    justify-content: space-between;
     align-items: flex-start;
-    padding: 1.6em 16em 1.6em 3.2em;
-    background-color: rgba(0, 0, 0, 0.7);
-    z-index: 100;
+    justify-content: space-between;
+    width: 100vw;
+    padding: 1.6em 3.2em 0;
 
     @media (max-width: 800px) {
-        padding: 1.6em 3.2em;
+        padding: 1.6em 3.2em 0;
     }
 
-    .logo {
-        font-size: 3rem; /* 30px */
-        line-height: 1.17em;
+    &__logo {
+        font-size: 2rem; /* 20px */
+        z-index: 11;
+        line-height: 1;
+        font-family: $logo-family;
+        font-weight: bolder;
         background: linear-gradient(
-            to right,
-            $secondary-color 0%,
-            $primary-color 100%
+                to right,
+                $secondary-color 0%,
+                $primary-color 100%
         );
         background-clip: text;
         -webkit-text-fill-color: transparent;
-        font-family: $logo-family;
-        font-weight: 900;
-        margin-top: -0.1666em;
-        transition: all 300ms ease-in;
-        z-index: 111;
+        //transition: all 300ms ease-in;
 
         @media (max-width: 800px) {
             order: 1;
-            margin: 0 auto;
         }
     }
 
-    .nav-container {
+    &__nav {
         @media (max-width: 800px) {
-            width: 0;
             position: relative;
         }
 
-        input {
+        &-burger {
+            position: relative;
+            z-index: 11;
             display: none;
-
-            @media (max-width: 800px) {
-                &:checked ~ .nav {
-                    height: 4.5em;
-                    margin-top: 0.75em;
-                    opacity: 1;
-                }
-
-                &:checked ~ .nav > .navItem {
-                    pointer-events: unset;
-                }
-
-                &:checked ~ .lineWrap > .line1::before {
-                    transform: translate(0%, 450%) rotate(-45deg);
-                }
-
-                &:checked ~ .lineWrap > .line2::before {
-                    transform: rotate(45deg);
-                }
-
-                &:checked ~ .lineWrap > .line3::before {
-                    transform: translate(0%, -450%) rotate(-45deg);
-                }
-            }
-        }
-
-        .line-wrap {
             width: 3em;
             height: 2em;
-            position: relative;
-            display: none;
-            margin-top: 0.5em;
             cursor: pointer;
-            z-index: 1;
+            //transition: all 200ms linear;
 
             @media (max-width: 800px) {
                 display: block;
 
-                .line1::before,
-                .line2::before,
-                .line3::before {
-                    width: 100%;
-                    height: 0.2em;
+                &-line1,
+                &-line2,
+                &-line3 {
                     position: absolute;
                     left: 0;
-                    content: "";
                     display: block;
-                    background-color: #fff;
-                    transition: all 300ms ease-in;
+                    width: 100%;
+                    height: 0.2em;
+                    background-color: $primary-color;
+                    transition: all 200ms linear;
                 }
 
-                .line1::before {
+                &-line1 {
                     top: 0;
+
+                    &.active {
+                        top: 50%;
+                        transform: translateY(-50%) rotate(-45deg);
+                        transition: all 1000ms linear;
+                    }
                 }
 
-                .line2::before {
+                &-line2 {
                     top: 50%;
                     transform: translateY(-50%);
+
+                    &.active {
+                        transform: translateY(-50%) rotate(45deg);
+                        transition: all 1000ms linear;
+                    }
                 }
 
-                .line3::before {
+                &-line3 {
                     bottom: 0;
+
+                    &.active {
+                        bottom: 50%;
+                        transform: translateY(50%) rotate(-45deg);
+                        transition: all 1000ms linear;
+                    }
                 }
             }
         }
 
-        .nav {
-            font-size: 1.8rem; /* 18px */
-            line-height: 1.5em;
+        &-list {
+            font-size: 1.4rem; /* 14px */
+            line-height: 20px;
             display: flex;
             align-items: center;
             color: $primary-color;
             font-family: $primary-family;
-            list-style: none;
 
             @media (max-width: 800px) {
-                width: 12em;
-                height: 0;
+                font-size: 2.6rem; /* 26px */
+                line-height: 1;
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 10;
+                width: 100vw;
+                height: 100vh;
                 flex-flow: column;
-                align-items: flex-start;
-                opacity: 0;
-                transition: all 300ms ease-in;
+                font-weight: bolder;
+                backdrop-filter: none;
+                background-color: rgba(0, 0, 0, 0);
+                transition: all 100ms linear 200ms;
+
+                &.active {
+                    backdrop-filter: blur(3px);
+                    background-color: rgba(0, 0, 0, 0.9);
+                    transition: all 300ms linear;
+                }
             }
 
-            .nav__item {
+            &-item {
+                margin-left: 4.8em;
+
                 @media (max-width: 800px) {
-                    pointer-events: none;
+                    margin: 0;
+                    position: absolute;
+                    left: 50%;
+                    z-index: 2;
+                    transform: translateX(-50%);
                 }
 
-                &:not(:last-child) {
-                    margin-right: 4.8em;
+                &:hover > .header__nav-list-item-link {
+                    color: $active-color;
+                }
 
+                &:first-child {
+                    margin: 0;
+                }
+
+                &:nth-child(1),
+                &:nth-child(2),
+                &:nth-child(3) {
                     @media (max-width: 800px) {
-                        margin: 0;
+                        top: -100%;
                     }
                 }
 
-                .link {
+                &.mount:nth-child(1) {
+                    @media (max-width: 800px) {
+                        animation: headerInactive1 200ms linear forwards;
+
+                        @keyframes headerInactive1 {
+                            0% {
+                                top: 76px;
+                            }
+                            100% {
+                                top: -100%;
+                            }
+                        }
+                    }
+                }
+
+                &.mount:nth-child(2) {
+                    @media (max-width: 800px) {
+                        animation: headerInactive2 200ms linear forwards;
+
+                        @keyframes headerInactive2 {
+                            0% {
+                                top: 176px;
+                            }
+                            100% {
+                                top: -100%;
+                            }
+                        }
+                    }
+                }
+
+                &.mount:nth-child(3) {
+                    @media (max-width: 800px) {
+                        animation: headerInactive3 200ms linear forwards;
+
+                        @keyframes headerInactive3 {
+                            0% {
+                                top: 276px;
+                            }
+                            100% {
+                                top: -100%;
+                            }
+                        }
+                    }
+                }
+
+                &.active:nth-child(1) {
+                    animation: headerActive1 1000ms linear forwards;
+
+                    @keyframes headerActive1 {
+                        0% {
+                            top: -100%;
+                        }
+                        33% {
+                            top: 98px;
+                        }
+                        43% {
+                            top: 54px;
+                        }
+                        63% {
+                            top: 76px;
+                        }
+                        100% {
+                            top: 76px;
+                        }
+                    }
+                }
+
+                &.active:nth-child(2) {
+                    animation: headerActive2 1000ms linear forwards;
+
+                    @keyframes headerActive2 {
+                        0% {
+                            opacity: 0;
+                            top: -100%;
+                        }
+                        32% {
+                            opacity: 0;
+                        }
+                        33% {
+                            opacity: 1;
+                            top: 98px;
+                        }
+                        45% {
+                            top: 188px;
+                        }
+                        55% {
+                            top: 154px;
+                        }
+                        75% {
+                            top: 176px;
+                        }
+                        100% {
+                            top: 176px;
+                        }
+                    }
+                }
+
+                &.active:nth-child(3) {
+                    animation: headerActive3 1000ms linear forwards;
+
+                    @keyframes headerActive3 {
+                        0% {
+                            opacity: 0;
+                            top: -100%;
+                        }
+                        44% {
+                            opacity: 0;
+                        }
+                        45% {
+                            opacity: 1;
+                            top: 188px;
+                        }
+                        55% {
+                            top: 285px;
+                        }
+                        58% {
+                            top: 276px;
+                        }
+                        100% {
+                            top: 276px;
+                        }
+                    }
+                }
+
+                &-link {
                     color: $primary-color;
                     transition: color 300ms ease-in;
                 }
 
-                .link.router-link-exact-active {
+                &-link.router-link-exact-active {
                     color: $active-color;
                 }
             }
 
-            .nav__item:hover > .link {
-                color: $active-color;
+            &-video {
+                position: fixed;
+                top: 98px;
+                left: 0;
+                z-index: 1;
+                width: 100%;
+                height: max-content;
+                display: none;
+
+                &.active {
+                    display: block;
+                }
+
+                &-shadow {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    box-shadow: 0px 0px 10px 9px rgba(0, 0, 0, 0.9) inset;
+                }
             }
         }
     }

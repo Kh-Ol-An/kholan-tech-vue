@@ -1,38 +1,11 @@
 [
   {
-    "language": "English",
-    "lang": "en",
-    "logo": "}{01@η",
-    "nav": {
-      "main": "<Main />",
-      "games": "<Games />",
-      "cv": "<CV />",
-      "me": "<Who am I? />",
-      "contacts": "<Contacts />"
-    },
-    "download_cv": "Download CV",
-    "title": {
-      "main": "to <Main />",
-      "games": "<Games />",
-      "cv": "to <CV />",
-      "me": "to <Who am I? />",
-      "contacts": "to <Contacts />",
-      "language": "Select your language",
-      "click": "Press",
-      "download": "Download CV"
-    },
-    "text": "Hello! My name is Oleg. I am results-oriented software developer and research professional. I make it my goal to create software with the user in mind, creating applications with a useable and intuitive user interface experience. I also understand the importance of creating highly readable and easily maintainable source code. I am constantly striving to learn new technologies and look to ways to better myself in this rapidly  changing industry.",
-    "psBefor": "P.S. If you find a bug or you have ideas on how to do it better, please ",
-    "psLink": "contact",
-    "psAfter": " me in any convenient way."
-  },
-  {
     "language": "Українська",
     "lang": "ua",
     "logo": "KhOlAn",
     "nav": {
       "main": "<Головна />",
-      "games": "<Ігри />",
+      "wens": "<WENS />",
       "cv": "<Резюме />",
       "me": "<Хто я? />",
       "contacts": "<Контакти />"
@@ -40,7 +13,7 @@
     "download_cv": "Завантажити резюме",
     "title": {
       "main": "Перейти на <Головну />",
-      "games": "<Ігри />",
+      "wens": "<WENS />",
       "cv": "Перейти до <Резюме />",
       "me": "Перейти до <Хто я />",
       "contacts": "Перейти до <Контактiв />",
@@ -59,7 +32,7 @@
     "logo": "ХОлАн",
     "nav": {
       "main": "<Главная />",
-      "games": "<Игры />",
+      "wens": "<WENS />",
       "cv": "<Резюме />",
       "me": "<Кто я? />",
       "contacts": "<Контакты />"
@@ -67,7 +40,7 @@
     "download_cv": "Скачать резюме",
     "title": {
       "main": "Перейти на <Головную />",
-      "games": "<Игры />",
+      "wens": "<WENS />",
       "cv": "Перейти к <Резюме />",
       "me": "Перейти к <Кто я />",
       "contacts": "Перейти к <Контактам />",
@@ -79,5 +52,32 @@
     "psBefor": "Пы.Сы. Если Вы нашли ошибку или у Вас есть идеи как сделать лучше, пожалуйста, ",
     "psLink": "свяжитесь",
     "psAfter": " со мной любым удобным способом."
+  },
+  {
+    "language": "English",
+    "lang": "en",
+    "logo": "}{01@η",
+    "nav": {
+      "main": "<Main />",
+      "wens": "<WENS />",
+      "cv": "<CV />",
+      "me": "<Who am I? />",
+      "contacts": "<Contacts />"
+    },
+    "download_cv": "Download CV",
+    "title": {
+      "main": "to <Main />",
+      "wens": "<WENS />",
+      "cv": "to <CV />",
+      "me": "to <Who am I? />",
+      "contacts": "to <Contacts />",
+      "language": "Select your language",
+      "click": "Press",
+      "download": "Download CV"
+    },
+    "text": "Hello! My name is Oleg. I am results-oriented software developer and research professional. I make it my goal to create software with the user in mind, creating applications with a useable and intuitive user interface experience. I also understand the importance of creating highly readable and easily maintainable source code. I am constantly striving to learn new technologies and look to ways to better myself in this rapidly  changing industry.",
+    "psBefor": "P.S. If you find a bug or you have ideas on how to do it better, please ",
+    "psLink": "contact",
+    "psAfter": " me in any convenient way."
   }
 ]

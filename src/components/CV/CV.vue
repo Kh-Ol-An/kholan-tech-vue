@@ -1,9 +1,9 @@
 <template>
     <div class="CV" @click="handleInActive">
         <div class="CV__download">
-            <span class="CV__download-text">{{ getContentLang.download_cv }}</span>
-            <a class="CV__download-link" :title="getContentLang.title.download" :href="link">
-                {{ getContentLang.download_cv }}
+            <span class="CV__download-text">{{ contentLang.download_cv }}</span>
+            <a class="CV__download-link" :title="contentLang.title.download" :href="link">
+                {{ contentLang.download_cv }}
             </a>
         </div>
 
@@ -12,10 +12,10 @@
                  src="@/assets/images/bg/cv-bg-img.png"
                  alt="tablet"
                  width="1920"/>
-            <button class="CV__tablet-btn" :class="{none: isNone}" :title="getContentLang.title.click" type="button"
+            <button class="CV__tablet-btn" :class="{none: isNone}" :title="contentLang.title.click" type="button"
                     @click="handleActive"></button>
             <div class="CV__tablet-cv" :class="{active: isActive, static: isStatic}">
-                <a class="CV__tablet-cv-link" :title="getContentLang.title.download"
+                <a class="CV__tablet-cv-link" :title="contentLang.title.download"
                    :href="link">
                     <img class="CV__tablet-cv-img" :src="cvImg" alt="resume" width="1414"/>
                 </a>
@@ -39,20 +39,22 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(["getContentLang"]),
+        ...mapGetters({
+            contentLang: "getContentLang"
+        }),
         link() {
             let tempLink = ""
-            if (this.getContentLang.lang === 'en') {
+            if (this.contentLang.lang === 'en') {
                 tempLink = "https://drive.google.com/uc?export=download&id=11vVAXWVAtGT3S3jvlmr2-l7yFOVtcD4U"
-            } else if (this.getContentLang.lang === 'ua') {
+            } else if (this.contentLang.lang === 'ua') {
                 tempLink = "https://drive.google.com/uc?export=download&id=1_PXWLhnOMHCdS9aPhyOBGrC2-YEWDATV"
-            } else if (this.getContentLang.lang === 'ru') {
+            } else if (this.contentLang.lang === 'ru') {
                 tempLink = "https://drive.google.com/uc?export=download&id=1vNnfHAkqUQZo1LdigKXLYnM1577hwk-b"
             }
             return tempLink
         },
         cvImg() {
-            return require(`@/assets/images/cv/cv-${this.getContentLang.lang}.jpg`)
+            return require(`@/assets/images/cv/cv-${this.contentLang.lang}.jpg`)
         }
     },
     methods: {
@@ -119,7 +121,7 @@ export default {
         align-items: center;
         margin: 8em auto 0;
         font-family: $primary-family;
-        font-weight: 900;
+        font-weight: bolder;
         transition: 500ms;
 
         &-text {
@@ -128,7 +130,7 @@ export default {
             position: absolute;
             padding: 0 1em;
             font-family: $primary-family;
-            font-weight: 900;
+            font-weight: bolder;
             color: $active-color;
             text-align: center;
         }
@@ -143,7 +145,7 @@ export default {
             padding: 0 1em;
             background: rgba(0, 0, 0, 0.7);
             font-family: $primary-family;
-            font-weight: 900;
+            font-weight: bolder;
             color: $primary-color;
             -webkit-mask: url('https://raw.githubusercontent.com/robin-dela/css-mask-animation/master/img/nature-sprite.png');
             mask: url('https://raw.githubusercontent.com/robin-dela/css-mask-animation/master/img/nature-sprite.png');
