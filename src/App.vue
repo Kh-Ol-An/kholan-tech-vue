@@ -23,7 +23,7 @@ export default {
 @import "~@/styles/fonts.scss";
 
 
-.lang-wrap:hover ~ a {
-    padding-bottom: 1.6em;
-}
+//.lang-wrap:hover ~ a {
+//    padding-bottom: 1.6em;
+//}
 </style>
