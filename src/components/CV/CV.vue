@@ -3,14 +3,14 @@
         <div class="cv container" ref="cv">
             <div class="cv__left">
                 <div class="cv__left-block">
-                    <div class="cv__left-block-img">
+                    <div class="cv__left-block-img level__4">
                         <img src="@/assets/images/cv/ava.jpg" alt="ava">
                     </div>
-                    <h2 class="cv__left-block-name">Oleg Khristenko</h2>
+                    <h2 class="cv__left-block-name level__3">Oleg Khristenko</h2>
                     <p class="cv__left-block-prof">Front-End Developer</p>
                 </div>
                 <div class="cv__left-block">
-                    <h3 class="cv__left-block-title">Summary</h3>
+                    <h3 class="cv__left-block-title level__3">Summary</h3>
                     <p class="cv__left-block-text">Results-oriented software developer and research professional. I make
                         it
                         my goal to create software with the user in mind, creating applications with a useable and
@@ -21,7 +21,7 @@
                         better myself in this rapidly changing industry.</p>
                 </div>
                 <div class="cv__left-block">
-                    <h3 class="cv__left-block-title">Tech skills</h3>
+                    <h3 class="cv__left-block-title level__3">Tech skills</h3>
                     <ul class="cv__left-block-text">
                         <li>-JavaScript</li>
                         <li>-JQuery</li>
@@ -39,7 +39,7 @@
                     </ul>
                 </div>
                 <div class="cv__left-block">
-                    <h3 class="cv__left-block-title">Soft skills</h3>
+                    <h3 class="cv__left-block-title level__3">Soft skills</h3>
                     <ul class="cv__left-block-text">
                         <li>-Resposible</li>
                         <li>-Scrupulouse</li>
@@ -47,55 +47,55 @@
                     </ul>
                 </div>
                 <div class="cv__left-block">
-                    <h3 class="cv__left-block-title">Contacts</h3>
+                    <h3 class="cv__left-block-title level__3">Contacts</h3>
                     <ul class="cv__left-block-text">
-                        <li>Telephone: <a href="tel:+380508899268">+380 50 88 99 268</a></li>
-                        <li>Telegram: <a href="tg://resolve?domain=@kholan">@kholan</a></li>
-                        <li>Skype: <a href="skype:hristenkoleg?chat">hristenkoleg</a></li>
-                        <li>Email: <a href="mailto:olegkhristenko@gmail.com">olegkhristenko@gmail.com</a></li>
-                        <li>GitHub: <a href="https://github.com/Kh-Ol-An">github.com/Kh-Ol-An</a></li>
-                        <li>LinkedIn: <a href="https://linkedin.com/in/kh-ol-an">linkedin.com/in/kh-ol-an</a></li>
-                        <li>Website: <a href="/">kholan.tech</a></li>
+                        <li>Telephone: <a class="level__2" href="tel:+380508899268">+380 50 88 99 268</a></li>
+                        <li>Telegram: <a class="level__2" href="tg://resolve?domain=@kholan">@kholan</a></li>
+                        <li>Skype: <a class="level__2" href="skype:hristenkoleg?chat">hristenkoleg</a></li>
+                        <li>Email: <a class="level__2" href="mailto:olegkhristenko@gmail.com">olegkhristenko@gmail.com</a></li>
+                        <li>GitHub: <a class="level__2" href="https://github.com/Kh-Ol-An">github.com/Kh-Ol-An</a></li>
+                        <li>LinkedIn: <a class="level__2" href="https://linkedin.com/in/kh-ol-an">linkedin.com/in/kh-ol-an</a></li>
+                        <li>Website: <a class="level__2" href="/">kholan.tech</a></li>
                     </ul>
                 </div>
             </div>
 
             <div class="cv__right">
                 <div class="cv__right-block">
-                    <h3 class="cv__right-block-title">Portfolio</h3>
+                    <h3 class="cv__right-block-title level__3">Portfolio</h3>
                     <div class="cv__right-block-box">
                         <p class="cv__right-block-box-name">
-                            <span>Smart Group</span>
-                            <a href="https://smartgroup.ua">https://smartgroup.ua/</a>
+                            <span class="level__2">Smart Group</span>
+                            <a class="level__1" href="https://smartgroup.ua">https://smartgroup.ua/</a>
                         </p>
                         <p class="cv__right-block-box-name">
-                            <span>WO</span>
-                            <a href="https://wo.ua">https://wo.ua/</a>
+                            <span class="level__2">WO</span>
+                            <a class="level__1" href="https://wo.ua">https://wo.ua/</a>
                         </p>
                         <p class="cv__right-block-box-name">
-                            <span>Cecotec</span>
-                            <a href="https://cecotec.tech">https://cecotec.tech/</a>
+                            <span class="level__2">Cecotec</span>
+                            <a class="level__1" href="https://cecotec.tech">https://cecotec.tech/</a>
                         </p>
                         <p class="cv__right-block-box-name">
-                            <span>Deerma</span>
-                            <a href="https://deerma.ua">https://deerma.ua/</a>
+                            <span class="level__2">Deerma</span>
+                            <a class="level__1" href="https://deerma.ua">https://deerma.ua/</a>
                         </p>
                         <p class="cv__right-block-box-name">
-                            <span>Profit Whales</span>
-                            <a href="https://profitwhales.com">https://profitwhales.com/</a>
+                            <span class="level__2">Profit Whales</span>
+                            <a class="level__1" href="https://profitwhales.com">https://profitwhales.com/</a>
                         </p>
                         <p class="cv__right-block-box-name">
-                            <span>Personal site</span>
-                            <a href="http://kholan.tech">http://kholan.tech/</a>
+                            <span class="level__2">Personal site</span>
+                            <a class="level__1" href="http://kholan.tech">http://kholan.tech/</a>
                         </p>
                     </div>
                 </div>
 
                 <div class="cv__right-block">
-                    <h3 class="cv__right-block-title">Experience</h3>
+                    <h3 class="cv__right-block-title level__3">Experience</h3>
                     <div class="cv__right-block-box">
-                        <h4 class="cv__right-block-box-name">Smart Group</h4>
-                        <ul class="cv__right-block-box-list">
+                        <h4 class="cv__right-block-box-name level__2">Smart Group</h4>
+                        <ul class="cv__right-block-box-list level__1">
                             <li class="cv__right-block-box-list-link"><a href="https://smartgroup.ua">https://smartgroup.ua/</a>
                             </li>
                             <li class="cv__right-block-box-list-link"><a href="https://yunmai.ua">https://yunmai.ua/</a>
@@ -111,62 +111,62 @@
                             </li>
                         </ul>
                         <p class="cv__right-block-text">Technology:
-                            <span>Vue, JQuery, fetch, Adaptive Web Design.</span>
+                            <span class="level__-1">Vue, JQuery, fetch, Adaptive Web Design.</span>
                         </p>
                         <p class="cv__right-block-text">About:
-                            <span>Smart Group is an ecosystem of services between producer and consumer.</span>
+                            <span class="level__-1">Smart Group is an ecosystem of services between producer and consumer.</span>
                         </p>
                         <ul class="cv__right-block-box-list">
                             <li>Responsibilities and Achievements:</li>
-                            <li>-Adaptive web design</li>
-                            <li>-Receiving and processing data</li>
-                            <li>-Routing</li>
-                            <li>-Communication with backend-developers and designer</li>
+                            <li class="level__-1">-Adaptive web design</li>
+                            <li class="level__-1">-Receiving and processing data</li>
+                            <li class="level__-1">-Routing</li>
+                            <li class="level__-1">-Communication with backend-developers and designer</li>
                         </ul>
                     </div>
 
                     <div class="cv__right-block-box">
-                        <h4 class="cv__right-block-box-name">Profit Whales</h4>
-                        <a class="cv__right-block-box-link"
+                        <h4 class="cv__right-block-box-name level__2">Profit Whales</h4>
+                        <a class="cv__right-block-box-link level__1"
                            href="https://profitwhales.com">https://profitwhales.com/</a>
                         <p class="cv__right-block-text">Technology:
-                            <span>React.js, Redux, Axios, Adaptive Web Design.</span>
+                            <span class="level__-1">React.js, Redux, Axios, Adaptive Web Design.</span>
                         </p>
-                        <p class="cv__right-block-text">About: <span>Amazon advertising optimization.</span></p>
+                        <p class="cv__right-block-text">About: <span class="level__-1">Amazon advertising optimization.</span></p>
                         <ul class="cv__right-block-box-list">
                             <li>Responsibilities and Achievements:</li>
-                            <li>-Adaptive web design</li>
-                            <li>-Receiving and processing data</li>
-                            <li>-Routing</li>
-                            <li>-Communication with backend-developers</li>
+                            <li class="level__-1">-Adaptive web design</li>
+                            <li class="level__-1">-Receiving and processing data</li>
+                            <li class="level__-1">-Routing</li>
+                            <li class="level__-1">-Communication with backend-developers</li>
                         </ul>
                     </div>
 
                     <div class="cv__right-block-box">
-                        <p class="cv__right-block-box-name">Sales experience from 2010 to 2018</p>
+                        <p class="cv__right-block-box-name level__2">Sales experience from 2010 to 2018</p>
                     </div>
                 </div>
 
                 <div class="cv__right-block">
-                    <h3 class="cv__right-block-title">Education</h3>
+                    <h3 class="cv__right-block-title level__3">Education</h3>
                     <div class="cv__right-block-box">
-                        <p class="cv__right-block-box-name">GoIT UP Scale Academy</p>
-                        <p class="cv__right-block-text">Front-End Developer</p>
-                        <ul class="cv__right-block-box-list">
+                        <p class="cv__right-block-box-name level__2">GoIT UP Scale Academy</p>
+                        <p class="cv__right-block-text level__2">Front-End Developer</p>
+                        <ul class="cv__right-block-box-list level__-1">
                             <li>-Passed a three-month Bootcamp with full time immersion in the code</li>
                             <li>-Was a Team Lead on "Arrow" and "Go to Goal" projects</li>
                             <li>-High academic performance</li>
                         </ul>
                     </div>
-                    <div class="cv__right-block-box">
+                    <div class="cv__right-block-box level__2">
                         <p class="cv__right-block-box-name">Poltava institute of economics and law</p>
                         <p class="cv__right-block-text">Specialist, Finance</p>
                     </div>
                 </div>
 
                 <div class="cv__right-block">
-                    <h3 class="cv__right-block-title">Hobbies</h3>
-                    <p class="cv__right-block-text"><span>Meditanion, books, cycling, snowboarding</span></p>
+                    <h3 class="cv__right-block-title level__3">Hobbies</h3>
+                    <p class="cv__right-block-text level__-1"><span>Meditanion, books, cycling, snowboarding</span></p>
                 </div>
             </div>
         </div>
@@ -215,7 +215,7 @@ export default {
             this.tilty = this.dx / this.cx
             this.radius = Math.sqrt(Math.pow(this.tiltx, 2) + Math.pow(this.tilty, 2))
             this.degree = this.radius * 12
-            gsap.to(this.$refs.cv,{transform: `rotate3d( ${this.tiltx}, ${this.tilty}, 0, ${this.degree}deg )`})
+            gsap.to(this.$refs.cv, {transform: `rotate3d( ${this.tiltx}, ${this.tilty}, 0, ${this.degree}deg )`})
             // console.log("x", this.tiltx)
             // console.log("Y", this.tilty)
         }
@@ -238,13 +238,15 @@ export default {
     display: flex;
     width: 100%;
     height: max-content;
+    transform-style: preserve-3d;
     box-shadow: 0px -4px 10px 2px rgba(34, 60, 80, 0.2);
     border-radius: 2px;
-    background: #fff;
+    //background: #fff;
     font-family: $logo-family;
     font-family: $primary-family;
     font-family: $text-family;
     font-family: "Ubuntu", sans-serif;
+    //transform: rotate3d(1, 1, 0, -9deg);
 
     //&::before,
     //&::after {
@@ -338,6 +340,7 @@ export default {
                 line-height: 1.4;
 
                 a {
+                    display: inline-block;
                     color: #fff;
                     font-style: italic;
                 }
@@ -420,8 +423,32 @@ export default {
             &-text {
                 font-size: 24px;
                 line-height: 1.4;
+
+                span {
+                    display: inline-block;
+                }
             }
         }
     }
+}
+
+.level__-1 {
+    transform: translateZ(-15px);
+}
+
+.level__1 {
+    transform: translateZ(15px);
+}
+
+.level__2 {
+    transform: translateZ(30px);
+}
+
+.level__3 {
+    transform: translateZ(45px);
+}
+
+.level__4 {
+    transform: translateZ(70px);
 }
 </style>
