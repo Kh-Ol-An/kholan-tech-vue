@@ -1,4 +1,6 @@
-import content from "@/content/lang.json";
+import ru from "@/content/lang/ru.json";
+import ua from "@/content/lang/ua.json";
+import en from "@/content/lang/en.json";
 
 export default {
     state: {
@@ -17,7 +19,14 @@ export default {
 
     actions: {
         updateContentLang({ commit }, lang) {
-            const completeContent = content.find((el) => el.lang === lang)
+            let completeContent = null
+            if (lang === "en") {
+                completeContent = en
+            } else if (lang === "ua") {
+                completeContent = ua
+            } else if (lang === "ru") {
+                completeContent = ru
+            }
             return commit("setContentLang", completeContent);
         },
     },

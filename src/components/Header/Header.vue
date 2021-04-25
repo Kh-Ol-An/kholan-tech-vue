@@ -15,14 +15,24 @@
                         {{ (contentLang && contentLang.nav) ? contentLang.nav.main : '' }}
                     </router-link>
                 </li>
-                <!--                <li class="header__nav-list-item" :class="{active: isHeaderBurger, mount: isLoudPage}">-->
-                <!--                    <router-link class="header__nav-list-item-link" to="/game">-->
-                <!--                        {{ (contentLang && contentLang.nav) ? contentLang.nav.wens : '' }}-->
-                <!--                    </router-link>-->
-                <!--                </li>-->
                 <li class="header__nav-list-item" :class="{active: isHeaderBurger, mount: isLoudPage}">
-                    <router-link class="header__nav-list-item-link" to="/cv">
-                        {{ (contentLang && contentLang.nav) ? contentLang.nav.cv : '' }}
+                    <router-link class="header__nav-list-item-link" to="/game">
+                        {{ (contentLang && contentLang.nav) ? contentLang.nav.wens : '' }}
+                    </router-link>
+                </li>
+                <li class="header__nav-list-item" :class="{active: isHeaderBurger, mount: isLoudPage}">
+                    <router-link class="header__nav-list-item-link" to="/cv_1.0">
+                        {{ (contentLang && contentLang.nav) ? contentLang.nav.cv1 : '' }}
+                    </router-link>
+                </li>
+                <li class="header__nav-list-item" :class="{active: isHeaderBurger, mount: isLoudPage}">
+                    <router-link class="header__nav-list-item-link" to="/cv_2.0">
+                        {{ (contentLang && contentLang.nav) ? contentLang.nav.cv2 : '' }}
+                    </router-link>
+                </li>
+                <li class="header__nav-list-item" :class="{active: isHeaderBurger, mount: isLoudPage}">
+                    <router-link class="header__nav-list-item-link" to="/cv_3.0">
+                        {{ (contentLang && contentLang.nav) ? contentLang.nav.cv3 : '' }}
                     </router-link>
                 </li>
                 <li class="header__nav-list-item" :class="{active: isHeaderBurger, mount: isLoudPage}">

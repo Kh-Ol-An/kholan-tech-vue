@@ -1,33 +1,33 @@
 <template>
     <div class="lang" @mouseover="isMount = true">
         <label
-            v-for="data in content"
-            :key="data.lang"
+            v-for="lang in langs"
+            :key="lang"
             class="lang__label"
-            :class="{ enable: localLang === data.lang, disable: localLang !== data.lang, mount: isMount }"
+            :class="{ enable: localLang === lang, disable: localLang !== lang, mount: isMount }"
             title="language"
         >
             <input
                 class="lang__label-input"
                 type="radio"
-                :value="data.lang"
+                :value="lang"
                 v-model="localLang"
                 @change="handleChange"
             />
-            <span class="lang__label-flag" :class="data.lang"/>
+            <span class="lang__label-flag" :class="lang"/>
         </label>
     </div>
 </template>
 
 <script>
 import {mapActions} from "vuex";
-import content from "@/content/lang.json";
+// import content from "@/content/lang.json";
 
 export default {
     name: "Lang",
     data() {
         return {
-            content,
+            langs: ["en", "ru", "ua"],
             localLang: "",
             enable: false,
             disable: false,

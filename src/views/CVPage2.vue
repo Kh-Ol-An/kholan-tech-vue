@@ -1,13 +1,13 @@
 <template>
-    <CV/>
+    <CV2/>
 </template>
 
 <script>
-import CV from "@/components/CV/CV"
+import CV2 from "@/components/CV2/CV2"
 
 export default {
-    name: "CVPage",
-    components: {CV}
+    name: "CVPage2",
+    components: {CV2}
 };
 </script>
 

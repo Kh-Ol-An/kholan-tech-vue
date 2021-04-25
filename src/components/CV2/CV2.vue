@@ -179,7 +179,7 @@ import {gsap} from 'gsap';
 // gsap.registerPlugin(CSSPlugin);
 
 export default {
-    name: "CV",
+    name: "CV2",
     data() {
         return {
             cx: window.innerWidth / 2,

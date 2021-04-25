@@ -3,7 +3,7 @@
         <ul class="WENS__field">
             <li
                 v-for="count in content.fieldCells"
-                :key="count"
+                :key="count + 'a'"
                 class="WENS__field-cell"
                 :class="'pos-' + count"
                 @click="handleFieldClick">
@@ -11,24 +11,24 @@
             </li>
 
             <!-- старт/дом и финиш каждого игрока -->
-            <startCells v-for="start in content.startFinishCalls" :key="start" :player="'south'" :start="start"
+            <startCells v-for="start in content.startFinishCalls" :key="start + 'b'" :player="'south'" :start="start"
                         :mark="'ss'"/>
-            <finishCells v-for="finish in content.startFinishCalls" :key="finish" :player="'south'" :finish="finish"
+            <finishCells v-for="finish in content.startFinishCalls" :key="finish + 'c'" :player="'south'" :finish="finish"
                          :mark="'sf'"/>
 
-            <startCells v-for="start in content.startFinishCalls" :key="start" :player="'west'" :start="start"
+            <startCells v-for="start in content.startFinishCalls" :key="start + 'd'" :player="'west'" :start="start"
                         :mark="'ws'"/>
-            <finishCells v-for="finish in content.startFinishCalls" :key="finish" :player="'west'" :finish="finish"
+            <finishCells v-for="finish in content.startFinishCalls" :key="finish + 'e'" :player="'west'" :finish="finish"
                          :mark="'wf'"/>
 
-            <startCells v-for="start in content.startFinishCalls" :key="start" :player="'north'" :start="start"
+            <startCells v-for="start in content.startFinishCalls" :key="start + 'f'" :player="'north'" :start="start"
                         :mark="'ns'"/>
-            <finishCells v-for="finish in content.startFinishCalls" :key="finish" :player="'north'" :finish="finish"
+            <finishCells v-for="finish in content.startFinishCalls" :key="finish + 'g'" :player="'north'" :finish="finish"
                          :mark="'nf'"/>
 
-            <startCells v-for="start in content.startFinishCalls" :key="start" :player="'east'" :start="start"
+            <startCells v-for="start in content.startFinishCalls" :key="start + 'h'" :player="'east'" :start="start"
                         :mark="'es'"/>
-            <finishCells v-for="finish in content.startFinishCalls" :key="finish" :player="'east'" :finish="finish"
+            <finishCells v-for="finish in content.startFinishCalls" :key="finish + 'i'" :player="'east'" :finish="finish"
                          :mark="'ef'"/>
 
             <!-- фишки игрока -->
@@ -131,7 +131,7 @@
 
 <script>
 import {mapGetters} from "vuex";
-import content from "@/content/WENS/content.json";
+import content from "@/content/WENS/WENS.json";
 import startCells from "@/components/Game/startCells/startCells";
 import finishCells from "@/components/Game/finishCells/finishCells";
 

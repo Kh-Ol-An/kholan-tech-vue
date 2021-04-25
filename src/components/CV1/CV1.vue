@@ -28,7 +28,7 @@
 import {mapGetters} from "vuex";
 
 export default {
-    name: "CV",
+    name: "CV1",
     data() {
         return {
             isAbsolute: false,
