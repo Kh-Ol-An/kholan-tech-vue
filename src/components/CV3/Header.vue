@@ -1,5 +1,5 @@
 <template>
-    <header class='header section'>
+    <section class='header section'>
         <div class='container'>
             <div class='header__naming naming'>
                 <div class='header__naming-ava' ref="ava">
@@ -113,7 +113,7 @@
                 </div>
             </div>
         </div>
-    </header>
+    </section>
 </template>
 
 <script>

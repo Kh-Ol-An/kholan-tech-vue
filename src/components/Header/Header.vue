@@ -49,7 +49,7 @@
             </ul>
         </div>
 
-        <Lang/>
+        <Lang v-if="isVisible"/>
     </header>
 </template>
 
@@ -64,6 +64,7 @@ export default {
         return {
             isHeaderBurger: false,
             isHeaderVideo: false,
+            isVisible: true,
             // убирает анимацию во время первой загрузки страницы
             isLoudPage: false,
             isPaused: null,
@@ -99,13 +100,11 @@ export default {
         //     this.isPaused = e.target.paused
         // }
     },
-    // watch: {
-    //     // isPaused() {
-    //     //     if (this.$refs.rafVideo.pause()) {
-    //     //         return false
-    //     //     }
-    //     // }
-    // }
+    watch: {
+        $route(to) {
+            to.path === "/cv_3.0" ? this.isVisible = false : this.isVisible = true
+        }
+    },
 };
 </script>
 

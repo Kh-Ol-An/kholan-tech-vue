@@ -19,6 +19,7 @@ export default {
 <style lang="scss">
 @import "~@/styles/normalize.scss";
 @import "~@/styles/reset.scss";
-@import "~@/styles/base.scss";
 @import "~@/styles/fonts.scss";
+@import "~@/styles/base.scss";
+@import "~@/styles/section.scss";
 </style>
